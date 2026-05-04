@@ -1,0 +1,3043 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ARQM | أرقـم — حلول سكن العمالة للشركات</title>
+  <meta name="description" content="حلول سكن عمالة متكاملة للشركات في الرياض — إدارة المجمعات، الصيانة، الأمن، الإعاشة، النقل وخدمات التشغيل."/>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+
+<style>
+/* ============================================================
+   ARQM — BRAND IDENTITY SYSTEM
+   Primary: Deep Forest Green #1C3D2C
+   Gold:    #B8963E
+   Cream:   #E8DCC8
+   Dark:    #0D1F16
+============================================================ */
+:root{
+  --green:    #1C3D2C;
+  --green2:   #0D1F16;
+  --green3:   #254D38;
+  --gold:     #B8963E;
+  --gold2:    #D4AF6A;
+  --gold3:    #8A6B25;
+  --cream:    #E8DCC8;
+  --cream2:   #F5F0E8;
+  --ink:      #0D1F16;
+  --muted:    #5A7A65;
+  --line:     rgba(184,150,62,.18);
+  --line2:    rgba(184,150,62,.08);
+  --shadow:   0 32px 80px rgba(13,31,22,.35);
+  --r:        24px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Tajawal',system-ui,sans-serif;
+  background:var(--green2);
+  color:var(--cream);
+  line-height:1.8;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ── Custom Cursor ── */
+.cursor{
+  position:fixed;width:10px;height:10px;
+  background:var(--gold);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transition:transform .15s ease;
+  mix-blend-mode:difference;
+}
+.cursor-ring{
+  position:fixed;width:38px;height:38px;
+  border:1px solid rgba(184,150,62,.5);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transition:all .35s ease;
+}
+
+/* ── Grain Overlay ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.03;pointer-events:none;
+}
+
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+.container{
+  width:min(1200px,calc(100% - 40px));
+  margin-inline:auto;
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  background:var(--green2);
+  border-bottom:1px solid var(--line);
+  padding:10px 0;
+  position:relative;z-index:10;
+}
+.topbar-inner{
+  display:flex;justify-content:space-between;
+  font-size:13px;color:rgba(232,220,200,.55);
+  font-weight:500;flex-wrap:wrap;gap:8px;
+}
+.topbar-inner span:first-child{color:var(--gold);font-weight:700;letter-spacing:.5px}
+
+/* ── HEADER ── */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(13,31,22,.88);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  height:80px;display:flex;
+  align-items:center;justify-content:space-between;gap:20px;
+}
+
+/* ── LOGO ── */
+.brand{display:flex;align-items:center;gap:14px;color:var(--cream)}
+.brand-logo{
+  display:flex;align-items:center;gap:10px;
+}
+.brand-symbol{
+  width:48px;height:48px;
+  border:1px solid var(--gold);border-radius:12px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--green),var(--green3));
+  position:relative;overflow:hidden;
+}
+.brand-symbol::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    45deg,
+    transparent,transparent 4px,
+    rgba(184,150,62,.06) 4px,rgba(184,150,62,.06) 5px
+  );
+}
+.brand-symbol svg{position:relative;z-index:1}
+.brand-name{display:flex;flex-direction:column;line-height:1.1}
+.brand-en{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:600;
+  color:var(--gold);letter-spacing:3px;
+}
+.brand-ar{
+  font-size:13px;font-weight:700;
+  color:rgba(232,220,200,.6);letter-spacing:1px;
+}
+
+.nav-links{
+  display:flex;gap:24px;
+  font-size:14px;font-weight:700;
+  color:rgba(232,220,200,.65);
+}
+.nav-links a{
+  position:relative;padding-bottom:3px;
+  transition:color .25s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;right:0;left:0;
+  height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:right;
+  transition:transform .3s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+.menu-btn{
+  display:none;width:44px;height:44px;
+  border:1px solid var(--line);background:transparent;
+  border-radius:12px;font-size:20px;color:var(--cream);cursor:pointer;
+}
+
+/* ── BUTTONS ── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 28px;border-radius:999px;
+  font-family:'Tajawal',sans-serif;font-weight:800;font-size:15px;
+  transition:all .3s;cursor:pointer;border:none;white-space:nowrap;
+}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--ink);
+  box-shadow:0 8px 30px rgba(184,150,62,.3);
+}
+.btn-gold:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 40px rgba(184,150,62,.45);
+}
+.btn-outline{
+  background:transparent;
+  border:1px solid rgba(184,150,62,.4);
+  color:var(--gold);
+}
+.btn-outline:hover{
+  background:rgba(184,150,62,.08);
+  border-color:var(--gold);
+}
+.btn-white{
+  background:white;color:var(--ink);
+}
+.btn-white:hover{background:var(--cream2)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  padding:100px 0 60px;
+}
+
+/* Animated background */
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 70% at 15% 50%,rgba(28,61,44,.8) 0%,transparent 65%),
+    radial-gradient(ellipse 50% 60% at 85% 20%,rgba(184,150,62,.12) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 50% at 70% 80%,rgba(28,61,44,.4) 0%,transparent 60%);
+  background-color:var(--green2);
+}
+
+/* Geometric pattern */
+.hero-pattern{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(184,150,62,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(184,150,62,.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:patternShift 20s linear infinite;
+}
+@keyframes patternShift{
+  0%{background-position:0 0}
+  100%{background-position:60px 60px}
+}
+
+/* Floating orbs */
+.orb{
+  position:absolute;border-radius:50%;
+  filter:blur(80px);pointer-events:none;
+  animation:orbFloat 8s ease-in-out infinite;
+}
+.orb-1{
+  width:400px;height:400px;
+  background:rgba(184,150,62,.08);
+  top:-100px;left:-100px;
+  animation-delay:0s;
+}
+.orb-2{
+  width:300px;height:300px;
+  background:rgba(28,61,44,.6);
+  bottom:-80px;right:-80px;
+  animation-delay:3s;
+}
+.orb-3{
+  width:200px;height:200px;
+  background:rgba(184,150,62,.06);
+  top:50%;right:20%;
+  animation-delay:5s;
+}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(20px,-30px) scale(1.05)}
+  66%{transform:translate(-15px,20px) scale(.95)}
+}
+
+.hero-content{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1.1fr .9fr;
+  gap:60px;align-items:center;
+}
+
+/* Pill badge */
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:999px;
+  border:1px solid rgba(184,150,62,.3);
+  background:rgba(184,150,62,.07);
+  color:var(--gold2);font-size:13px;font-weight:700;
+  margin-bottom:24px;
+  animation:fadeUp .8s ease both;
+}
+.hero-badge span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.6)}
+}
+
+h1{
+  font-family:'Tajawal',sans-serif;
+  font-size:clamp(36px,5.5vw,70px);
+  font-weight:900;line-height:1.1;
+  color:var(--cream);margin-bottom:20px;
+  animation:fadeUp .8s ease .15s both;
+}
+h1 .gold-text{
+  color:var(--gold);
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.1em;
+}
+
+.hero-desc{
+  font-size:18px;color:rgba(232,220,200,.65);
+  line-height:1.9;margin-bottom:32px;
+  animation:fadeUp .8s ease .3s both;
+}
+
+.hero-actions{
+  display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px;
+  animation:fadeUp .8s ease .45s both;
+}
+
+.trust-badges{
+  display:flex;gap:10px;flex-wrap:wrap;
+  animation:fadeUp .8s ease .6s both;
+}
+.trust-badge{
+  display:flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(184,150,62,.05);
+  font-size:13px;font-weight:700;
+  color:rgba(232,220,200,.7);
+}
+.trust-badge::before{
+  content:'✦';color:var(--gold);font-size:10px;
+}
+
+/* ── HERO CARD ── */
+.hero-card{
+  background:rgba(28,61,44,.4);
+  border:1px solid var(--line);
+  border-radius:32px;
+  padding:28px;
+  backdrop-filter:blur(20px);
+  animation:fadeLeft .9s ease .2s both;
+  position:relative;overflow:hidden;
+}
+.hero-card::before{
+  content:'';position:absolute;
+  top:0;right:0;
+  width:160px;height:160px;
+  background:radial-gradient(circle,rgba(184,150,62,.15),transparent 70%);
+  border-radius:50%;
+  transform:translate(40px,-40px);
+}
+
+.card-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:20px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--line);
+}
+.card-dots{display:flex;gap:6px}
+.card-dot{width:10px;height:10px;border-radius:50%}
+.dot-r{background:#ff5f57}
+.dot-y{background:#febc2e}
+.dot-g{background:#28c840}
+.card-title{
+  font-size:12px;color:rgba(232,220,200,.4);
+  font-weight:700;letter-spacing:1px;margin-right:8px;
+}
+
+.stats-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+  margin-bottom:16px;
+}
+.stat-box{
+  background:rgba(13,31,22,.5);
+  border:1px solid var(--line2);
+  border-radius:16px;padding:16px;
+  transition:border-color .3s;
+}
+.stat-box:hover{border-color:rgba(184,150,62,.3)}
+.stat-label{font-size:11px;color:rgba(232,220,200,.4);font-weight:700;margin-bottom:4px;letter-spacing:.5px}
+.stat-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:600;color:var(--gold);line-height:1;
+}
+.stat-sub{font-size:11px;color:rgba(232,220,200,.4);margin-top:3px}
+
+.bars-section{padding-top:4px}
+.bar-row{margin-bottom:12px}
+.bar-info{display:flex;justify-content:space-between;font-size:12px;color:rgba(232,220,200,.5);margin-bottom:5px;font-weight:700}
+.bar-track{height:6px;background:rgba(184,150,62,.08);border-radius:50px;overflow:hidden}
+.bar-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--gold3),var(--gold));animation:barGrow 1.8s ease 1s both}
+@keyframes barGrow{from{width:0}}
+.b1{width:85%}.b2{width:62%}.b3{width:78%}
+
+/* ── METRICS ── */
+.metrics-section{
+  padding:0;position:relative;z-index:2;
+  margin-top:-30px;
+}
+.metrics-inner{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:20px;overflow:hidden;
+}
+.metric-item{
+  background:rgba(13,31,22,.95);
+  padding:28px 24px;
+  text-align:center;
+  transition:background .3s;
+}
+.metric-item:hover{background:rgba(28,61,44,.95)}
+.metric-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-weight:600;
+  color:var(--gold);line-height:1;margin-bottom:6px;
+}
+.metric-label{font-size:13px;color:rgba(232,220,200,.5);font-weight:700}
+
+/* ── SECTION BASE ── */
+.section{padding:90px 0}
+.section-alt{
+  background:linear-gradient(180deg,rgba(28,61,44,.15),transparent);
+}
+
+.section-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:800;
+  color:var(--gold);letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.section-tag::before,.section-tag::after{
+  content:'';display:block;
+  width:24px;height:1px;background:var(--gold);
+  opacity:.5;
+}
+
+h2{
+  font-size:clamp(28px,4vw,52px);
+  font-weight:900;line-height:1.15;
+  color:var(--cream);margin-bottom:16px;
+}
+h2 .accent{color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic}
+
+.section-desc{
+  font-size:17px;color:rgba(232,220,200,.55);
+  line-height:1.9;max-width:640px;
+}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+
+.about-visual{
+  position:relative;border-radius:28px;overflow:hidden;
+  aspect-ratio:4/5;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:6rem;
+  border:1px solid var(--line);
+}
+.about-visual::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,var(--green2) 0%,transparent 50%);
+}
+.about-badge{
+  position:absolute;bottom:24px;right:24px;
+  background:rgba(13,31,22,.9);
+  border:1px solid var(--line);
+  border-radius:16px;padding:16px 20px;
+  z-index:2;backdrop-filter:blur(10px);
+}
+.about-badge strong{display:block;font-size:24px;color:var(--gold);font-family:'Cormorant Garamond',serif}
+.about-badge span{font-size:12px;color:rgba(232,220,200,.5);font-weight:700}
+
+.about-content{}
+.about-text{
+  color:rgba(232,220,200,.6);font-size:16px;line-height:2;margin:20px 0 32px;
+}
+.about-list{display:flex;flex-direction:column;gap:12px}
+.about-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 18px;
+  background:rgba(28,61,44,.2);
+  border:1px solid var(--line2);
+  border-radius:14px;
+  font-size:14px;font-weight:700;
+  color:rgba(232,220,200,.75);
+  transition:all .3s;
+}
+.about-item:hover{border-color:rgba(184,150,62,.3);background:rgba(28,61,44,.4);color:var(--cream)}
+.about-item-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(184,150,62,.12);
+  display:grid;place-items:center;font-size:16px;flex-shrink:0;
+}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.service-card{
+  background:rgba(28,61,44,.15);
+  border:1px solid var(--line2);
+  border-radius:24px;padding:32px 28px;
+  transition:all .4s;
+  position:relative;overflow:hidden;
+  group:true;
+}
+.service-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(184,150,62,.06),transparent);
+  opacity:0;transition:opacity .4s;
+}
+.service-card:hover{
+  border-color:rgba(184,150,62,.3);
+  transform:translateY(-8px);
+  box-shadow:0 24px 60px rgba(13,31,22,.5);
+}
+.service-card:hover::before{opacity:1}
+
+.service-icon{
+  width:60px;height:60px;border-radius:18px;
+  background:rgba(184,150,62,.1);
+  border:1px solid rgba(184,150,62,.2);
+  display:grid;place-items:center;
+  font-size:26px;margin-bottom:20px;
+  transition:transform .3s;
+}
+.service-card:hover .service-icon{transform:scale(1.1) rotate(-5deg)}
+
+.service-name{
+  font-size:18px;font-weight:800;
+  color:var(--cream);margin-bottom:10px;
+}
+.service-desc{
+  font-size:14px;color:rgba(232,220,200,.5);
+  line-height:1.8;
+}
+.service-arrow{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:16px;font-size:13px;font-weight:800;
+  color:var(--gold);opacity:0;transform:translateY(8px);
+  transition:all .3s;
+}
+.service-card:hover .service-arrow{opacity:1;transform:translateY(0)}
+
+/* ── PORTFOLIO ── */
+.portfolio-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+
+.table-wrap{
+  background:rgba(28,61,44,.15);
+  border:1px solid var(--line);
+  border-radius:24px;overflow:hidden;
+}
+table{width:100%;border-collapse:collapse}
+th{
+  background:rgba(184,150,62,.12);
+  padding:16px 20px;text-align:right;
+  font-size:13px;font-weight:800;
+  color:var(--gold);letter-spacing:.5px;
+  border-bottom:1px solid var(--line);
+}
+td{
+  padding:14px 20px;
+  border-bottom:1px solid var(--line2);
+  font-size:14px;font-weight:700;
+  color:rgba(232,220,200,.75);
+  transition:background .2s;
+}
+tr:hover td{background:rgba(184,150,62,.04)}
+tr:last-child td{border-bottom:none}
+
+.tag{
+  display:inline-block;padding:5px 14px;
+  border-radius:999px;font-weight:800;font-size:12px;
+  letter-spacing:.3px;
+}
+.tag-green{background:rgba(21,128,77,.2);color:#4ade80;border:1px solid rgba(74,222,128,.2)}
+.tag-gold{background:rgba(184,150,62,.15);color:var(--gold2);border:1px solid rgba(184,150,62,.25)}
+.tag-blue{background:rgba(29,109,166,.15);color:#60a5fa;border:1px solid rgba(96,165,250,.2)}
+
+.location-card{
+  background:rgba(28,61,44,.15);
+  border:1px solid var(--line);
+  border-radius:24px;padding:28px;
+}
+.location-card h3{font-size:20px;color:var(--cream);margin-bottom:8px}
+.location-card p{font-size:14px;color:rgba(232,220,200,.5);margin-bottom:16px;line-height:1.8}
+
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.chip{
+  background:rgba(184,150,62,.08);
+  border:1px solid rgba(184,150,62,.2);
+  border-radius:12px;padding:10px 14px;
+  font-size:13px;font-weight:800;
+  color:var(--gold2);text-align:center;
+  transition:all .25s;
+}
+.chip:hover{background:rgba(184,150,62,.15);border-color:var(--gold)}
+
+.map-box{
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(28,61,44,.5),rgba(13,31,22,.8));
+  border:1px solid var(--line);
+  height:180px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;position:relative;overflow:hidden;
+}
+.map-box::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(184,150,62,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(184,150,62,.06) 1px,transparent 1px);
+  background-size:20px 20px;
+}
+
+/* ── GALLERY ── */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto auto;
+  gap:14px;
+}
+.gallery-item{
+  position:relative;border-radius:20px;overflow:hidden;
+  border:1px solid var(--line2);
+  transition:transform .4s;
+}
+.gallery-item:hover{transform:scale(1.02)}
+.gallery-item:first-child{grid-row:span 2}
+.gallery-visual{
+  width:100%;height:100%;min-height:220px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3.5rem;
+  transition:transform .4s;
+}
+.gallery-item:first-child .gallery-visual{min-height:460px}
+.gallery-item:hover .gallery-visual{transform:scale(1.08)}
+.gallery-label{
+  position:absolute;bottom:0;right:0;left:0;
+  padding:20px 16px 14px;
+  background:linear-gradient(to top,rgba(13,31,22,.9),transparent);
+  font-size:13px;font-weight:800;color:var(--cream);
+}
+
+/* ══ PARTNERS ══ */
+.partners-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;margin-bottom:32px;
+}
+.partner-card{
+  background:rgba(28,61,44,.18);border:1px solid var(--line);
+  border-radius:20px;padding:28px 20px;text-align:center;
+  transition:all .35s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;
+}
+.partner-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(184,150,62,.05),transparent);
+  opacity:0;transition:opacity .35s;
+}
+.partner-card:hover{
+  transform:translateY(-6px);border-color:rgba(184,150,62,.4);
+  box-shadow:0 20px 50px rgba(13,31,22,.4);background:rgba(28,61,44,.3);
+}
+.partner-card:hover::before{opacity:1}
+.partner-icon{
+  font-size:2.6rem;margin-bottom:14px;
+  filter:drop-shadow(0 4px 12px rgba(184,150,62,.2));
+  transition:transform .35s;
+}
+.partner-card:hover .partner-icon{transform:scale(1.12) translateY(-3px)}
+.partner-name{font-size:15px;font-weight:800;color:var(--cream);margin-bottom:6px;line-height:1.3}
+.partner-tag{
+  display:inline-block;padding:4px 12px;border-radius:999px;
+  background:rgba(184,150,62,.1);border:1px solid rgba(184,150,62,.2);
+  font-size:11px;font-weight:700;color:var(--gold2);
+}
+.partners-trust{
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(28,61,44,.15);border:1px solid var(--line);
+  border-radius:20px;padding:24px 32px;flex-wrap:wrap;
+}
+.trust-item{text-align:center;flex:1;min-width:120px}
+.trust-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-weight:600;color:var(--gold);line-height:1;margin-bottom:4px;
+}
+.trust-lbl{font-size:13px;font-weight:700;color:rgba(232,220,200,.55)}
+.trust-divider{width:1px;height:48px;background:var(--line);flex-shrink:0}
+@media(max-width:900px){.partners-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.partners-grid{grid-template-columns:1fr 1fr}.trust-divider{display:none}.partners-trust{gap:20px}}
+
+/* ── SECTORS ── */
+.sectors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sector-card{
+  padding:36px 28px;
+  background:rgba(28,61,44,.15);
+  border:1px solid var(--line2);
+  border-radius:24px;
+  transition:all .35s;
+  position:relative;
+}
+.sector-card::after{
+  content:'';position:absolute;
+  bottom:0;right:0;left:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform .4s;
+}
+.sector-card:hover{border-color:rgba(184,150,62,.25);transform:translateY(-6px)}
+.sector-card:hover::after{transform:scaleX(1)}
+.sector-icon{font-size:36px;margin-bottom:16px;display:block}
+.sector-name{font-size:19px;font-weight:800;color:var(--cream);margin-bottom:8px}
+.sector-desc{font-size:14px;color:rgba(232,220,200,.5);line-height:1.8}
+
+/* ── PARTNERS ── */
+.partners-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:28px;
+}
+.partner-card{
+  background:rgba(28,61,44,.15);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:28px 20px;
+  text-align:center;
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  position:relative;
+  overflow:hidden;
+}
+.partner-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(184,150,62,.05),transparent);
+  opacity:0;transition:opacity .35s;
+}
+.partner-card:hover{
+  border-color:rgba(184,150,62,.4);
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(13,31,22,.4);
+}
+.partner-card:hover::before{opacity:1}
+.partner-icon{
+  font-size:2.8rem;
+  display:block;
+  margin-bottom:12px;
+  filter:drop-shadow(0 4px 12px rgba(184,150,62,.2));
+  transition:transform .35s;
+}
+.partner-card:hover .partner-icon{transform:scale(1.1) translateY(-4px)}
+.partner-name{
+  font-size:17px;
+  font-weight:900;
+  color:var(--cream);
+  margin-bottom:8px;
+}
+.partner-tag{
+  display:inline-block;
+  padding:4px 14px;
+  border-radius:999px;
+  background:rgba(184,150,62,.1);
+  border:1px solid rgba(184,150,62,.2);
+  font-size:12px;
+  font-weight:700;
+  color:var(--gold2);
+}
+.partner-logo-mark{
+  width:100%;height:80px;
+  border-radius:16px;
+  border:1px solid;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+  transition:all .35s;
+  padding:0 12px;
+}
+.partner-card:hover .partner-logo-mark{
+  transform:scale(1.04);
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+  text-align:center;
+  font-size:14px;
+  font-weight:700;
+  color:rgba(232,220,200,.35);
+  letter-spacing:.5px;
+}
+@media(max-width:768px){
+  .partners-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .partners-grid{grid-template-columns:1fr 1fr}
+}
+
+/* ── QUOTE ── */
+.quote-wrap{
+  background:linear-gradient(135deg,rgba(28,61,44,.5),rgba(13,31,22,.8));
+  border:1px solid var(--line);
+  border-radius:36px;padding:50px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+  position:relative;overflow:hidden;
+}
+.quote-wrap::before{
+  content:'أرقـم';
+  position:absolute;left:-20px;bottom:-40px;
+  font-size:200px;font-weight:900;
+  color:rgba(184,150,62,.04);line-height:1;
+  pointer-events:none;font-family:'Tajawal',sans-serif;
+}
+
+.quote-form{
+  background:rgba(13,31,22,.6);
+  border:1px solid var(--line);
+  border-radius:24px;padding:28px;
+  backdrop-filter:blur(10px);
+}
+label{
+  display:block;font-size:12px;font-weight:800;
+  color:var(--gold);letter-spacing:.5px;margin-bottom:8px;
+}
+input,select,textarea{
+  width:100%;
+  background:rgba(28,61,44,.4);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px 16px;
+  font-family:'Tajawal',sans-serif;font-size:15px;
+  color:var(--cream);margin-bottom:14px;
+  transition:border-color .25s;outline:none;
+}
+input::placeholder,textarea::placeholder{color:rgba(232,220,200,.25)}
+input:focus,select:focus,textarea:focus{border-color:rgba(184,150,62,.5)}
+select option{background:var(--green2);color:var(--cream)}
+textarea{min-height:100px;resize:vertical}
+
+/* ── CONTACT ── */
+.contact-wrap{
+  background:linear-gradient(135deg,rgba(28,61,44,.4),rgba(13,31,22,.6));
+  border:1px solid var(--line);border-radius:36px;padding:50px;
+  display:grid;grid-template-columns:1fr .9fr;gap:40px;align-items:center;
+}
+.contact-card{
+  background:rgba(13,31,22,.5);
+  border:1px solid var(--line);border-radius:24px;padding:28px;
+}
+.contact-item{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 0;
+  border-bottom:1px solid var(--line2);
+  font-size:15px;font-weight:700;color:rgba(232,220,200,.75);
+}
+.contact-item:last-child{border-bottom:none}
+.contact-item-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:rgba(184,150,62,.1);border:1px solid rgba(184,150,62,.2);
+  display:grid;place-items:center;font-size:18px;flex-shrink:0;
+}
+
+/* ── PROFILE ── */
+.profile-wrap{
+  display:grid;grid-template-columns:1fr .85fr;gap:40px;align-items:center;
+  background:rgba(28,61,44,.15);
+  border:1px solid var(--line);border-radius:36px;padding:50px;
+}
+.pdf-box{
+  border-radius:24px;overflow:hidden;
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  min-height:280px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:5rem;
+  position:relative;
+}
+.pdf-box::after{
+  content:'PDF';
+  position:absolute;bottom:16px;right:16px;
+  background:rgba(184,150,62,.2);
+  border:1px solid rgba(184,150,62,.3);
+  border-radius:8px;padding:6px 12px;
+  font-size:11px;font-weight:900;color:var(--gold);letter-spacing:2px;
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--line);
+  padding:60px 0 0;
+  background:var(--green2);
+}
+.footer-top{
+  display:grid;grid-template-columns:1.4fr 1fr;
+  gap:60px;padding-bottom:40px;
+  border-bottom:1px solid var(--line2);
+}
+.footer-logo{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.footer-desc{
+  font-size:14px;color:rgba(232,220,200,.4);
+  line-height:1.9;font-weight:500;
+  max-width:340px;margin-bottom:24px;
+}
+.footer-social{display:flex;gap:10px}
+.social-link{
+  width:40px;height:40px;border-radius:12px;
+  border:1px solid var(--line);
+  display:grid;place-items:center;
+  color:rgba(232,220,200,.5);
+  transition:all .3s;
+  flex-shrink:0;
+}
+.social-link:hover{transform:translateY(-3px)}
+.social-link.instagram:hover{
+  background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  border-color:transparent;color:white;
+  box-shadow:0 8px 20px rgba(220,39,67,.3);
+}
+.social-link.twitter:hover{
+  background:#000;border-color:#000;color:white;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
+}
+.social-link.snapchat:hover{
+  background:#FFFC00;border-color:#FFFC00;color:#000;
+  box-shadow:0 8px 20px rgba(255,252,0,.3);
+}
+.social-link.tiktok:hover{
+  background:linear-gradient(135deg,#010101,#69C9D0);
+  border-color:transparent;color:white;
+  box-shadow:0 8px 20px rgba(105,201,208,.3);
+}
+.footer-links-group{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.footer-col{display:flex;flex-direction:column;gap:10px}
+.footer-col h5{
+  font-size:13px;font-weight:800;
+  color:var(--gold);letter-spacing:1px;
+  margin-bottom:4px;
+}
+.footer-col a{
+  font-size:13px;color:rgba(232,220,200,.4);
+  font-weight:600;transition:color .2s;
+}
+.footer-col a:hover{color:var(--gold2)}
+.footer-bottom{
+  display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:12px;
+  padding:20px 0;
+}
+.footer-copy{font-size:12px;color:rgba(232,220,200,.3);font-weight:700}
+.footer-tag{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:13px;
+  color:rgba(184,150,62,.4);
+}
+
+/* ── FLOATING WA ── */
+.wa-btn{
+  position:fixed;left:20px;bottom:20px;z-index:60;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  color:white;border-radius:999px;
+  padding:14px 22px;font-weight:800;font-size:14px;
+  box-shadow:0 8px 30px rgba(37,211,102,.35);
+  display:flex;align-items:center;gap:8px;
+  transition:all .3s;
+}
+.wa-btn:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(37,211,102,.45)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeLeft{
+  from{opacity:0;transform:translateX(40px)}
+  to{opacity:1;transform:translateX(0)}
+}
+
+.reveal{opacity:0;transform:translateY(28px);transition:all .75s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── STEPS SECTION ── */
+.steps-section{
+  margin:28px 0 20px;
+  padding:36px;
+  background:rgba(13,31,22,.4);
+  border:1px solid var(--line2);
+  border-radius:24px;
+}
+.steps-header{margin-bottom:32px}
+.steps-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  position:relative;
+}
+.step-card{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding-left:28px;
+  position:relative;
+}
+.step-card:first-child{padding-left:0}
+.step-num-wrap{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:20px;
+}
+.step-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;font-weight:600;
+  color:var(--gold);line-height:1;
+  border:1px solid rgba(184,150,62,.25);
+  border-radius:14px;
+  padding:8px 16px;
+  flex-shrink:0;
+  background:rgba(184,150,62,.05);
+}
+.step-line{
+  flex:1;height:1px;
+  background:rgba(184,150,62,.2);
+  position:relative;
+}
+.step-line::after{
+  content:'→';
+  position:absolute;
+  left:-8px;top:-10px;
+  color:rgba(184,150,62,.4);
+  font-size:18px;
+}
+.step-line.last-line{opacity:0}
+.step-body{padding-left:0}
+.step-tag{
+  font-size:12px;font-weight:800;
+  color:var(--gold);letter-spacing:1px;
+  margin-bottom:8px;
+}
+.step-title{
+  font-size:20px;font-weight:900;
+  color:var(--cream);margin-bottom:10px;line-height:1.3;
+}
+.step-desc{
+  font-size:14px;color:rgba(232,220,200,.55);
+  line-height:1.9;margin-bottom:14px;
+}
+.step-tags{display:flex;flex-wrap:wrap;gap:6px}
+.step-tags span{
+  background:rgba(184,150,62,.07);
+  border:1px solid rgba(184,150,62,.15);
+  border-radius:999px;padding:4px 12px;
+  font-size:11px;font-weight:800;
+  color:rgba(184,150,62,.65);
+}
+
+@media(max-width:860px){
+  .steps-grid{grid-template-columns:1fr}
+  .step-card{padding-left:0;border-right:none;border-bottom:1px solid var(--line2);padding-bottom:24px;margin-bottom:24px}
+  .step-card:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+  .step-line{display:none}
+}
+
+/* ── LOCATION BUTTONS ── */
+.location-btns{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:8px;margin-bottom:14px;
+}
+.loc-btn{
+  padding:10px 8px;
+  background:rgba(28,61,44,.4);
+  border:1px solid var(--line);
+  border-radius:12px;
+  font-family:'Tajawal',sans-serif;
+  font-size:13px;font-weight:700;
+  color:rgba(232,220,200,.6);
+  cursor:pointer;
+  transition:all .25s;
+  text-align:center;
+}
+.loc-btn:hover{
+  border-color:rgba(184,150,62,.4);
+  color:rgba(232,220,200,.9);
+  background:rgba(184,150,62,.08);
+}
+.loc-btn.selected{
+  background:rgba(184,150,62,.15);
+  border-color:var(--gold);
+  color:var(--gold2);
+  box-shadow:0 0 12px rgba(184,150,62,.15);
+}
+
+/* ── INVESTOR TABS ── */
+.inv-tabs-wrap{
+  border:1px solid var(--line);
+  border-radius:32px;overflow:hidden;
+}
+.inv-tabs-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--line);
+}
+.inv-tab-btn{
+  display:flex;align-items:center;gap:16px;
+  padding:24px 32px;
+  background:rgba(13,31,22,.6);
+  border:none;cursor:pointer;
+  font-family:'Tajawal',sans-serif;
+  color:rgba(232,220,200,.5);
+  transition:all .3s;
+  border-left:1px solid var(--line);
+  position:relative;
+}
+.inv-tab-btn:last-child{border-left:none}
+.inv-tab-btn::after{
+  content:'';position:absolute;
+  bottom:0;right:0;left:0;height:2px;
+  background:var(--gold);
+  transform:scaleX(0);transition:transform .3s;
+}
+.inv-tab-btn.active{
+  background:rgba(28,61,44,.5);
+  color:var(--cream);
+}
+.inv-tab-btn.active::after{transform:scaleX(1)}
+.inv-tab-btn:hover:not(.active){background:rgba(28,61,44,.3);color:rgba(232,220,200,.8)}
+.tab-icon{font-size:28px;flex-shrink:0}
+.tab-title{font-size:16px;font-weight:800;text-align:right}
+.tab-sub{font-size:12px;opacity:.6;font-weight:600;text-align:right;margin-top:2px}
+
+.inv-tab-content{padding:28px}
+.inv-tab-content.hidden{display:none!important}
+
+/* ── INVESTOR SECTION ── */
+.investor-hero{
+  display:grid;grid-template-columns:1.1fr .9fr;
+  gap:0;border-radius:32px;overflow:hidden;
+  border:1px solid var(--line);margin-bottom:24px;
+}
+.investor-hero-content{
+  background:linear-gradient(135deg,rgba(28,61,44,.5),rgba(13,31,22,.8));
+  padding:50px 44px;
+}
+.inv-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(184,150,62,.12);border:1px solid rgba(184,150,62,.25);
+  border-radius:999px;padding:7px 16px;
+  font-size:13px;font-weight:800;color:var(--gold2);
+  margin-bottom:20px;
+}
+.inv-title{
+  font-size:clamp(24px,3vw,38px);font-weight:900;
+  color:var(--cream);line-height:1.2;margin-bottom:16px;
+}
+.inv-desc{
+  font-size:15px;color:rgba(232,220,200,.6);
+  line-height:1.9;margin-bottom:28px;
+}
+.inv-stats{
+  display:flex;gap:24px;margin-bottom:28px;flex-wrap:wrap;
+}
+.inv-stat{
+  border-right:2px solid rgba(184,150,62,.2);
+  padding-right:20px;
+}
+.inv-stat:first-child{border-right:none;padding-right:0}
+.inv-stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-weight:600;color:var(--gold);line-height:1;
+}
+.inv-stat-label{font-size:12px;color:rgba(232,220,200,.45);font-weight:700;margin-top:4px}
+
+.investor-hero-visual{
+  background:linear-gradient(135deg,var(--green2),var(--green));
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:40px 30px;gap:16px;
+  border-right:1px solid var(--line);
+}
+.inv-building{
+  font-size:5rem;
+  filter:drop-shadow(0 8px 20px rgba(184,150,62,.3));
+  animation:floatBuilding 4s ease-in-out infinite;
+}
+@keyframes floatBuilding{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+.inv-flow{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  width:100%;
+}
+.inv-flow-item{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(13,31,22,.5);
+  border:1px solid var(--line2);
+  border-radius:12px;padding:10px 16px;
+  font-size:13px;font-weight:700;
+  color:rgba(232,220,200,.6);width:100%;
+  transition:all .3s;
+}
+.inv-flow-item.active-flow{
+  background:rgba(184,150,62,.12);
+  border-color:rgba(184,150,62,.3);
+  color:var(--gold2);
+}
+.inv-flow-icon{
+  width:30px;height:30px;border-radius:8px;
+  background:rgba(184,150,62,.1);
+  display:grid;place-items:center;font-size:14px;flex-shrink:0;
+}
+.inv-flow-arrow{color:rgba(184,150,62,.3);font-size:18px}
+
+/* 4 cards grid */
+.investor-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:14px;margin-bottom:24px;
+}
+.inv-card{
+  background:rgba(28,61,44,.15);
+  border:1px solid var(--line2);
+  border-radius:22px;padding:28px 22px;
+  position:relative;overflow:hidden;
+  transition:all .35s;
+}
+.inv-card::after{
+  content:'';position:absolute;
+  top:0;right:0;left:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform .4s;
+}
+.inv-card:hover{
+  border-color:rgba(184,150,62,.25);
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(13,31,22,.5);
+}
+.inv-card:hover::after{transform:scaleX(1)}
+.inv-card-icon{
+  font-size:32px;margin-bottom:14px;display:block;
+}
+.inv-card-title{
+  font-size:16px;font-weight:800;color:var(--cream);margin-bottom:10px;
+}
+.inv-card-desc{
+  font-size:13px;color:rgba(232,220,200,.5);line-height:1.8;margin-bottom:14px;
+}
+.inv-card-tags{display:flex;flex-wrap:wrap;gap:6px}
+.inv-card-tags span{
+  background:rgba(184,150,62,.08);
+  border:1px solid rgba(184,150,62,.15);
+  border-radius:999px;padding:4px 10px;
+  font-size:11px;font-weight:800;color:rgba(184,150,62,.7);
+}
+
+/* CTA strip */
+.investor-cta{
+  background:linear-gradient(135deg,rgba(184,150,62,.1),rgba(28,61,44,.3));
+  border:1px solid rgba(184,150,62,.2);
+  border-radius:24px;padding:32px 36px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+}
+.investor-cta-text p{
+  font-size:16px;color:rgba(232,220,200,.7);font-weight:600;
+}
+
+/* ── LANGUAGE TOGGLE ── */
+.lang-toggle-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 18px;border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(184,150,62,.06);
+  font-family:'Tajawal',sans-serif;
+  font-size:13px;font-weight:800;
+  color:rgba(232,220,200,.75);
+  cursor:pointer;transition:all .25s;
+  white-space:nowrap;
+}
+.lang-toggle-btn:hover{
+  border-color:rgba(184,150,62,.4);
+  background:rgba(184,150,62,.12);
+  color:var(--gold2);
+}
+
+/* ── LOGIN NAV BUTTON ── */
+.btn-login-nav{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 20px;border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(184,150,62,.06);
+  font-family:'Tajawal',sans-serif;
+  font-size:14px;font-weight:800;
+  color:rgba(232,220,200,.75);
+  text-decoration:none;
+  transition:all .25s;
+  white-space:nowrap;
+}
+.btn-login-nav:hover{
+  border-color:rgba(184,150,62,.4);
+  background:rgba(184,150,62,.12);
+  color:var(--gold2);
+}
+
+.map-section-wrap{
+  border-radius:32px;overflow:hidden;
+  border:1px solid var(--line);
+  background:rgba(13,31,22,.6);
+}
+.map-legend{
+  display:flex;gap:20px;align-items:center;
+  padding:18px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+.legend-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;color:rgba(232,220,200,.6);
+}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-active{background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,.6)}
+.dot-secured{background:var(--gold);box-shadow:0 0 8px rgba(184,150,62,.6)}
+.dot-pipeline{background:#60a5fa;box-shadow:0 0 8px rgba(96,165,250,.6)}
+#arqm-map{height:480px;width:100%;z-index:1}
+.leaflet-popup-content-wrapper{
+  background:rgba(13,31,22,.95)!important;
+  border:1px solid rgba(184,150,62,.3)!important;
+  border-radius:16px!important;color:var(--cream)!important;
+  box-shadow:0 20px 50px rgba(0,0,0,.5)!important;
+}
+.leaflet-popup-tip{background:rgba(13,31,22,.95)!important}
+.leaflet-popup-content{margin:14px 18px!important;font-family:'Tajawal',sans-serif}
+.popup-name{font-size:15px;font-weight:800;color:var(--gold);margin-bottom:4px}
+.popup-info{font-size:13px;color:rgba(232,220,200,.6);font-weight:600}
+.popup-tag{display:inline-block;margin-top:8px;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:800}
+.leaflet-container{background:#0D1F16!important}
+.map-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--line);border-top:1px solid var(--line);
+}
+.map-loc-card{
+  display:flex;align-items:center;gap:12px;
+  padding:16px 20px;background:rgba(13,31,22,.8);
+  cursor:pointer;transition:background .25s;
+}
+.map-loc-card:hover,.map-loc-card.active-card{background:rgba(28,61,44,.6)}
+.mlc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.mlc-name{font-size:13px;font-weight:800;color:var(--cream);line-height:1.2}
+.mlc-sub{font-size:11px;color:rgba(232,220,200,.4);font-weight:600;margin-top:2px}
+.mlc-tag{margin-right:auto;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap;flex-shrink:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-content,.about-grid,.portfolio-layout,
+  .quote-wrap,.profile-wrap,.contact-wrap{grid-template-columns:1fr}
+  .services-grid,.sectors-grid{grid-template-columns:1fr 1fr}
+  .metrics-inner{grid-template-columns:1fr 1fr}
+  .map-cards{grid-template-columns:repeat(2,1fr)}
+  .investor-grid{grid-template-columns:repeat(2,1fr)}
+  .investor-hero{grid-template-columns:1fr}
+  .investor-hero-visual{display:none}
+}
+@media(max-width:640px){
+  .topbar{display:none}
+  .menu-btn{display:block}
+  .nav-links{
+    position:absolute;top:80px;right:16px;left:16px;
+    display:none;flex-direction:column;
+    background:rgba(13,31,22,.98);
+    border:1px solid var(--line);border-radius:20px;padding:20px;
+    backdrop-filter:blur(20px);
+  }
+  body.menu-open .nav-links{display:flex}
+  .nav>.btn-gold{display:none}
+  .services-grid,.sectors-grid,.gallery-grid,
+  .metrics-inner,.investor-grid{grid-template-columns:1fr}
+  .investor-hero{grid-template-columns:1fr}
+  .investor-hero-visual{display:none}
+  .gallery-item:first-child{grid-row:span 1}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .hero-content{gap:30px}
+  .wa-btn{right:16px;left:16px;justify-content:center}
+  .quote-wrap,.profile-wrap,.contact-wrap{padding:28px 20px}
+  .footer-top{grid-template-columns:1fr}
+  .footer-links-group{grid-template-columns:1fr 1fr}
+  .location-btns{grid-template-columns:1fr 1fr}
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span>✦ ARQM | أرقـم — Craft that Tells a Story</span>
+    <span>الرياض، المملكة العربية السعودية &nbsp;|&nbsp; +966 55 558 9155</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <div class="brand-logo">
+        <div class="brand-symbol">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 2L26 9V19L14 26L2 19V9L14 2Z" stroke="#B8963E" stroke-width="1.5" fill="none"/>
+            <path d="M14 8L20 11.5V18.5L14 22L8 18.5V11.5L14 8Z" fill="rgba(184,150,62,.2)" stroke="#B8963E" stroke-width="1"/>
+            <circle cx="14" cy="14" r="2.5" fill="#B8963E"/>
+          </svg>
+        </div>
+        <div class="brand-name">
+          <span class="brand-en">ARQM</span>
+          <span class="brand-ar">أرقـم</span>
+        </div>
+      </div>
+    </a>
+
+    <button class="menu-btn" onclick="document.body.classList.toggle('menu-open')">☰</button>
+
+    <nav class="nav-links">
+      <a href="#about"    data-ar="عن الشركة"      data-en="About">عن الشركة</a>
+      <a href="#services" data-ar="الخدمات"         data-en="Services">الخدمات</a>
+      <a href="#investor" data-ar="للمستثمرين ✦"    data-en="Investors ✦">للمستثمرين ✦</a>
+      <a href="#portfolio"data-ar="المجمعات"         data-en="Compounds">المجمعات</a>
+      <a href="#gallery"  data-ar="الصور"            data-en="Gallery">الصور</a>
+      <a href="#sectors"  data-ar="القطاعات"         data-en="Sectors">القطاعات</a>
+      <a href="#partners" data-ar="شركاؤنا"           data-en="Partners">شركاؤنا</a>
+      <a href="#contact"  data-ar="تواصل"            data-en="Contact">تواصل</a>
+    </nav>
+
+    <div style="display:flex;gap:10px;align-items:center">
+
+      <!-- Language Toggle -->
+      <button class="lang-toggle-btn" id="lang-toggle" onclick="toggleLang()">
+        <span id="lang-flag">🇸🇦</span>
+        <span id="lang-label">EN</span>
+      </button>
+
+      <a class="btn-login-nav" href="ARQM-Portal.html?v=3" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span id="nav-login">تسجيل دخول</span>
+      </a>
+      <a class="btn btn-gold" href="#quote" id="nav-quote">طلب عرض سعر ✦</a>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="container hero-content">
+      <div>
+        <div class="hero-badge"><span></span> حلول سكن العمالة للشركات الكبرى</div>
+        <h1>إدارة سكن العمالة<br>بأسلوب <span class="gold-text">احترافي</span> متكامل</h1>
+        <p class="hero-desc">
+          نوفر في أرقـم حلولاً متكاملة لسكن العمالة تشمل إدارة المجمعات،
+          الصيانة، الأمن والسلامة، الإعاشة، النقل، وخدمات الدعم اليومية —
+          كل ذلك تحت إدارة واحدة ومسؤولية واضحة.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#quote" data-ar="ابدأ شراكتك معنا ✦" data-en="Start Your Partnership ✦">ابدأ شراكتك معنا ✦</a>
+          <a class="btn btn-outline" href="#investor" data-ar="استثمر معنا 🏢" data-en="Invest With Us 🏢">استثمر معنا 🏢</a>
+        </div>
+        <div class="trust-badges">
+          <span class="trust-badge" data-ar="نقطة مسؤولية واحدة" data-en="Single Point of Responsibility">نقطة مسؤولية واحدة</span>
+          <span class="trust-badge" data-ar="تشغيل متكامل" data-en="Integrated Operations">تشغيل متكامل</span>
+          <span class="trust-badge" data-ar="امتثال وسلامة" data-en="Compliance & Safety">امتثال وسلامة</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="card-header">
+          <div class="card-dots">
+            <div class="card-dot dot-r"></div>
+            <div class="card-dot dot-y"></div>
+            <div class="card-dot dot-g"></div>
+          </div>
+          <span class="card-title">ARQM — لوحة التحكم</span>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-label">الطاقة المُدارة</div>
+            <div class="stat-val" id="stat-units">0</div>
+            <div class="stat-sub" data-ar="وحدة سكنية" data-en="Housing Units">وحدة سكنية</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">العمال ضمن الخدمة</div>
+            <div class="stat-val" id="stat-workers">0K+</div>
+            <div class="stat-sub" data-ar="والتوسع" data-en="and Expansion">والتوسع</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">المواقع في الرياض</div>
+            <div class="stat-val" id="stat-sites">0</div>
+            <div class="stat-sub" data-ar="مجمعات نشطة" data-en="Active Compounds">مجمعات نشطة</div>
+          </div>
+          <div class="stat-box" style="position:relative;overflow:hidden">
+            <div class="stat-label">التغطية الأمنية</div>
+            <div class="stat-val">24/7</div>
+            <div class="stat-sub">متابعة مستمرة</div>
+          </div>
+        </div>
+        <div class="bars-section">
+          <div class="bar-row">
+            <div class="bar-info"><span>الرمال</span><span>85%</span></div>
+            <div class="bar-track"><div class="bar-fill b1"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-info"><span>النهضة</span><span>62%</span></div>
+            <div class="bar-track"><div class="bar-fill b2"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-info"><span>السلي</span><span>78%</span></div>
+            <div class="bar-track"><div class="bar-fill b3"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ METRICS ═══ -->
+  <section style="padding:40px 0 70px">
+    <div class="container">
+      <div class="metrics-inner reveal">
+        <div class="metric-item">
+          <div class="metric-num" id="met-1">0</div>
+          <div class="metric-label" data-ar="طاقة جاهزة في الرمال والنهضة" data-en="Ready Capacity in Al-Rimal & Nahda">طاقة جاهزة في الرمال والنهضة</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-num">24/7</div>
+          <div class="metric-label" data-ar="أمن ومتابعة تشغيلية" data-en="Security & Operational Monitoring">أمن ومتابعة تشغيلية</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-num" id="met-2">0</div>
+          <div class="metric-label" data-ar="وجبات يومية عبر شركاء معتمدين" data-en="Daily Meals via Certified Partners">وجبات يومية عبر شركاء معتمدين</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-num">ISO</div>
+          <div class="metric-label" data-ar="مواءمة مع معايير سلامة الغذاء" data-en="Aligned with Food Safety Standards">مواءمة مع معايير سلامة الغذاء</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section class="section" id="about">
+    <div class="container about-grid">
+      <div class="about-visual reveal">
+        🏗️
+        <div class="about-badge">
+          <strong>SSCORP</strong>
+          <span>تحت مظلة المجموعة</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="section-tag">عن أرقـم</div>
+        <h2>مشغّل متخصص لسكن العمالة وإدارة <span class="accent">المرافق</span></h2>
+        <p class="about-text">
+          تعمل أرقـم تحت مظلة Saudi Specialized Corporation for Operations Real Estate Services،
+          وتركز على نماذج التشغيل الرئيسية، إدارة المجمعات، وحلول السكن والخدمات المساندة
+          للشركات والمشاريع الكبرى في المملكة العربية السعودية.
+        </p>
+        <div class="about-list">
+          <div class="about-item"><div class="about-item-icon">🎯</div data-ar="نقطة مسؤولية واحدة لجميع الخدمات" data-en="Single Point of Responsibility for All Services">نقطة مسؤولية واحدة لجميع الخدمات</div>
+          <div class="about-item"><div class="about-item-icon">⚡</div data-ar="استجابة سريعة وتشغيل متواصل 24/7" data-en="Fast Response & Continuous 24/7 Operations">استجابة سريعة وتشغيل متواصل 24/7</div>
+          <div class="about-item"><div class="about-item-icon">📋</div data-ar="امتثال كامل لاشتراطات الجهات الحكومية" data-en="Full Compliance with Government Requirements">امتثال كامل لاشتراطات الجهات الحكومية</div>
+          <div class="about-item"><div class="about-item-icon">📈</div data-ar="حلول قابلة للتوسع حسب احتياج المشروع" data-en="Scalable Solutions Based on Project Needs">حلول قابلة للتوسع حسب احتياج المشروع</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section class="section section-alt" id="services">
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:50px">
+        <div class="section-tag" style="justify-content:center">خدماتنا</div>
+        <h2>كل ما تحتاجه الشركة<br>تحت <span class="accent">إدارة واحدة</span></h2>
+        <p class="section-desc" style="margin:0 auto">خدمات تشغيلية متكاملة قابلة للتخصيص حسب عدد العمال وموقع المشروع.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">🏠</div>
+          <div class="service-name">إدارة السكن</div>
+          <div class="service-desc" data-ar="تشغيل المجمعات، إدارة الإشغال، دخول وخروج العمال، وتطبيق لوائح السكن." data-en="Compound operations, occupancy management, worker check-in/out, and housing regulations.">تشغيل المجمعات، إدارة الإشغال، دخول وخروج العمال، وتطبيق لوائح السكن.</div>
+          <div class="service-arrow" data-ar="اكتشف المزيد →" data-en="Discover More →">اكتشف المزيد →</div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🔧</div>
+          <div class="service-name">الصيانة وإدارة المرافق</div>
+          <div class="service-desc" data-ar="صيانة وقائية وتصحيحية للكهرباء والسباكة والتكييف والأعمال المدنية." data-en="Preventive and corrective maintenance for electrical, plumbing, HVAC, and civil works.">صيانة وقائية وتصحيحية للكهرباء والسباكة والتكييف والأعمال المدنية.</div>
+          <div class="service-arrow">اكتشف المزيد →</div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🛡️</div>
+          <div class="service-name">الأمن والسلامة</div>
+          <div class="service-desc" data-ar="أمن 24/7، تحكم بالدخول، CCTV، أنظمة حريق، وتمارين سلامة دورية." data-en="24/7 security, access control, CCTV, fire systems, and periodic safety drills.">أمن 24/7، تحكم بالدخول، CCTV، أنظمة حريق، وتمارين سلامة دورية.</div>
+          <div class="service-arrow">اكتشف المزيد →</div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🍽️</div>
+          <div class="service-name">الإعاشة والتموين</div>
+          <div class="service-desc" data-ar="ثلاث وجبات يومية، وجبات معلبة، مطابخ مركزية، وصالات طعام." data-en="Three daily meals, packed meals, central kitchens, and dining halls.">ثلاث وجبات يومية، وجبات معلبة، مطابخ مركزية، وصالات طعام.</div>
+          <div class="service-arrow">اكتشف المزيد →</div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🚌</div>
+          <div class="service-name">النقل واللوجستيات</div>
+          <div class="service-desc" data-ar="نقل العمالة من وإلى مواقع العمل، تخطيط مسارات، وجدولة حسب الورديات." data-en="Worker transport to/from work sites, route planning, and shift scheduling.">نقل العمالة من وإلى مواقع العمل، تخطيط مسارات، وجدولة حسب الورديات.</div>
+          <div class="service-arrow">اكتشف المزيد →</div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">⭐</div>
+          <div class="service-name">الخدمات الداعمة</div>
+          <div class="service-desc" data-ar="عيادة، سوق مصغر، حلاق، مرافق رياضية، مغاسل، مواقف، ومناطق مشتركة." data-en="Clinic, mini-market, barber, sports, laundry, parking, and common areas.">عيادة، سوق مصغر، حلاق، مرافق رياضية، مغاسل، مواقف، ومناطق مشتركة.</div>
+          <div class="service-arrow">اكتشف المزيد →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INVESTOR SERVICE ═══ -->
+  <section class="section" id="investor">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="reveal" style="text-align:center;margin-bottom:48px">
+        <div class="section-tag" style="justify-content:center">للمستثمرين</div>
+        <h2>شراكة استثمارية<br>تناسب <span class="accent">طموحك</span></h2>
+        <p class="section-desc" style="margin:0 auto">
+          سواء كنت تمتلك أرضاً تريد تطويرها، أو عقاراً جاهزاً تريد تشغيله —
+          أرقـم لديها الحل الأمثل لك.
+        </p>
+      </div>
+
+      <!-- TABS -->
+      <div class="inv-tabs-wrap reveal">
+
+        <!-- Tab buttons -->
+        <div class="inv-tabs-header">
+          <button class="inv-tab-btn active" onclick="switchTab('operate')">
+            <span class="tab-icon">🏢</span>
+            <div>
+              <div class="tab-title">تشغيل عقار</div>
+              <div class="tab-sub">عمارة أو كمباوند جاهز</div>
+            </div>
+          </button>
+          <button class="inv-tab-btn" onclick="switchTab('develop')">
+            <span class="tab-icon">🌍</span>
+            <div>
+              <div class="tab-title">تطوير أراضي</div>
+              <div class="tab-sub">أرض فضاء أو مشروع جديد</div>
+            </div>
+          </button>
+        </div>
+
+        <!-- ══ TAB 1: تشغيل عقار ══ -->
+        <div class="inv-tab-content" id="tab-operate">
+          <div class="investor-hero">
+            <div class="investor-hero-content">
+              <div class="inv-badge">🏆 تشغيل احترافي متكامل</div>
+              <h3 class="inv-title" data-ar="عقارك يشتغل،" data-en="Your property earns,">عقارك يشتغل،<br>وأنت <span style="color:var(--gold)">تقبض</span></h3>
+              <p class="inv-desc">
+                عمارة فاضية؟ كمباوند مهمل؟ مبنى بدون استثمار؟<br>
+                نتولى كل شيء — من أول يوم حتى آخر ريال.
+                تأهيل، تأجير، إدارة يومية، وتقارير مالية شفافة.
+                دورك الوحيد: تستلم عائدك السنوي.
+              </p>
+              <div class="inv-stats">
+                <div class="inv-stat">
+                  <div class="inv-stat-num" id="inv-occupancy">0%</div>
+                  <div class="inv-stat-label" data-ar="متوسط نسبة إشغال" data-en="Average Occupancy Rate">متوسط نسبة إشغال</div>
+                </div>
+                <div class="inv-stat">
+                  <div class="inv-stat-num" style="display:flex;align-items:baseline;gap:4px">
+                    +<span id="inv-yield">0</span>%
+                    <span style="font-size:13px;color:#4ade80;font-family:'Tajawal',sans-serif;font-weight:800">▲ سنوي</span>
+                  </div>
+                  <div class="inv-stat-label" data-ar="عائد سنوي على الاستثمار" data-en="Annual Return on Investment">عائد سنوي على الاستثمار</div>
+                </div>
+                <div class="inv-stat">
+                  <div class="inv-stat-num" id="inv-days">0+</div>
+                  <div class="inv-stat-label" data-ar="يوم للتحضير والتشغيل" data-en="Days to Prepare & Launch">يوم للتحضير والتشغيل</div>
+                </div>
+              </div>
+              <a class="btn btn-gold" href="https://wa.me/966555589155?text=مرحباً، أنا مستثمر وأرغب في تشغيل عقاري مع أرقـم" style="margin-top:8px">
+                تحدث مع فريق الاستثمار ✦
+              </a>
+            </div>
+            <div class="investor-hero-visual">
+              <div class="inv-building">🏢</div>
+              <div class="inv-flow">
+                <div class="inv-flow-item">
+                  <div class="inv-flow-icon">📋</div>
+                  <span data-ar="تقييم العقار" data-en="Property Assessment">تقييم العقار</span>
+                </div>
+                <div class="inv-flow-arrow">↓</div>
+                <div class="inv-flow-item">
+                  <div class="inv-flow-icon">🔨</div>
+                  <span data-ar="التأهيل والتجهيز" data-en="Preparation & Setup">التأهيل والتجهيز</span>
+                </div>
+                <div class="inv-flow-arrow">↓</div>
+                <div class="inv-flow-item">
+                  <div class="inv-flow-icon">👷</div>
+                  <span data-ar="استقبال العمال" data-en="Worker Onboarding">استقبال العمال</span>
+                </div>
+                <div class="inv-flow-arrow">↓</div>
+                <div class="inv-flow-item active-flow">
+                  <div class="inv-flow-icon">💰</div>
+                  <span data-ar="عائد سنوي ثابت" data-en="Fixed Annual Return">عائد سنوي ثابت</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="investor-grid" style="margin-top:16px">
+            <div class="inv-card">
+              <div class="inv-card-icon">🏗️</div>
+              <div class="inv-card-title">تأهيل وتجهيز العقار</div>
+              <div class="inv-card-desc">نجهّز العقار وفق اشتراطات سكن العمالة من أثاث وإضاءة وأنظمة أمن وصيانة.</div>
+              <div class="inv-card-tags"><span>تصميم داخلي</span><span>تأثيث كامل</span><span>CCTV</span></div>
+            </div>
+            <div class="inv-card">
+              <div class="inv-card-icon">📑</div>
+              <div class="inv-card-title">عقد تشغيل شفاف</div>
+              <div class="inv-card-desc">عقد واضح يحدد العائد، آلية الدفع السنوي، ومسؤوليات كل طرف بدون مفاجآت.</div>
+              <div class="inv-card-tags"><span>عائد ثابت</span><span>دفع سنوي</span><span>بنود واضحة</span></div>
+            </div>
+            <div class="inv-card">
+              <div class="inv-card-icon">📊</div>
+              <div class="inv-card-title">تقارير دورية مفصّلة</div>
+              <div class="inv-card-desc">تقارير شاملة: نسبة الإشغال، الإيرادات، تكاليف الصيانة، وأداء الوحدات.</div>
+              <div class="inv-card-tags"><span>إشغال شهري</span><span>كشف مالي</span><span>تقرير صيانة</span></div>
+            </div>
+            <div class="inv-card">
+              <div class="inv-card-icon">🛡️</div>
+              <div class="inv-card-title">حماية العقار وصيانته</div>
+              <div class="inv-card-desc">فريق صيانة دائم يحافظ على العقار ويُصلح أي عطل فوراً طوال مدة العقد.</div>
+              <div class="inv-card-tags"><span>صيانة دورية</span><span>إصلاح فوري</span><span>حماية الأصول</span></div>
+            </div>
+          </div>
+
+          <!-- خطوات تشغيل العقار -->
+          <div class="steps-section">
+            <div class="steps-header">
+              <div class="section-tag">كيف نعمل معك؟</div>
+              <h3 style="font-size:clamp(20px,2.5vw,32px);font-weight:900;color:var(--cream);margin-top:6px">ثلاث خطوات وعقارك يدرّ دخلاً</h3>
+            </div>
+            <div class="steps-grid">
+
+              <div class="step-card">
+                <div class="step-num-wrap">
+                  <div class="step-num">01</div>
+                  <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                  <div class="step-tag" data-ar="الخطوة الأولى" data-en="Step One">الخطوة الأولى</div>
+                  <h4 class="step-title" data-ar="فحص وتقييم العقار" data-en="Property Inspection & Assessment">فحص وتقييم العقار</h4>
+                  <p class="step-desc">
+                    فريقنا يزورك، يفحص كل ركن، ويحدد بالضبط وش يحتاج العقار.
+                    هدفنا واحد: نضمن إنه جاهز يستقبل العمال بأعلى معايير الجودة.
+                  </p>
+                  <div class="step-tags">
+                    <span>زيارة ميدانية</span>
+                    <span>تقرير مفصّل</span>
+                    <span>مجاناً</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-num-wrap">
+                  <div class="step-num">02</div>
+                  <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                  <div class="step-tag" data-ar="الخطوة الثانية" data-en="Step Two">الخطوة الثانية</div>
+                  <h4 class="step-title" data-ar="تطوير وتحسين المكان" data-en="Development & Improvement">تطوير وتحسين المكان</h4>
+                  <p class="step-desc">
+                    نرفع مستوى العقار من كل ناحية — أثاث، مرافق، مناطق مشتركة.
+                    السكان يرتاحون، وأنت تستفيد من إشغال أعلى وعائد أكبر.
+                  </p>
+                  <div class="step-tags">
+                    <span>تأثيث كامل</span>
+                    <span>تصميم داخلي</span>
+                    <span>مرافق مشتركة</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-num-wrap">
+                  <div class="step-num">03</div>
+                  <div class="step-line last-line"></div>
+                </div>
+                <div class="step-body">
+                  <div class="step-tag" data-ar="الخطوة الثالثة" data-en="Step Three">الخطوة الثالثة</div>
+                  <h4 class="step-title" data-ar="التشغيل ملعبنا 🎯" data-en="Operations Are Our Game 🎯">التشغيل ملعبنا 🎯</h4>
+                  <p class="step-desc">
+                    المكان جاهز؟ نشغّله فوراً. إدارة يومية، صيانة، أمن، إعاشة —
+                    كل شيء تحت مسؤوليتنا الكاملة، وأنت تتابع تقاريرك براحة.
+                  </p>
+                  <div class="step-tags">
+                    <span>إدارة كاملة</span>
+                    <span>صيانة دورية</span>
+                    <span>تقارير شهرية</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="investor-cta" style="margin-top:16px">
+            <div class="investor-cta-text">
+              <div class="section-tag" style="margin-bottom:8px" data-ar="خطوتك التالية" data-en="Your Next Step">خطوتك التالية</div>
+              <p data-ar="تواصل معنا الآن — التقييم مجاني ويجيك خلال 48 ساعة 🎯" data-en="Contact us now — free assessment within 48 hours 🎯">تواصل معنا الآن — التقييم مجاني ويجيك خلال 48 ساعة 🎯</p>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end">
+              <a class="btn btn-gold" href="https://wa.me/966555589155?text=مرحباً، أريد تقييم عقاري للتشغيل مع أرقـم" data-ar="احصل على تقييم مجاني" data-en="Get a Free Assessment">احصل على تقييم مجاني</a>
+              <a class="btn btn-outline" href="#quote">طلب عرض سعر</a>
+            </div>
+          </div>
+
+        </div><!-- end tab-operate -->
+
+        <!-- ══ TAB 2: تطوير أراضي ══ -->
+        <div class="inv-tab-content hidden" id="tab-develop">
+          <div class="investor-hero">
+            <div class="investor-hero-content">
+              <div class="inv-badge" style="background:rgba(96,165,250,.1);border-color:rgba(96,165,250,.25);color:#93c5fd">🌍 تطوير وبناء من الصفر</div>
+              <h3 class="inv-title" data-ar="أرضك تستحق" data-en="Your land deserves">أرضك تستحق<br>أكثر من أن <span style="color:var(--gold)">تبقى فاضية</span></h3>
+              <p class="inv-desc">
+                عندك أرض وما تدري وين تبدأ؟<br>
+                نحن ندرس، نصمم، نبني، ونشغّل — وأنت تراقب عائدك ينمو.
+                شراكة حقيقية من أول فكرة لآخر ريال.
+              </p>
+              <div class="inv-stats">
+                <div class="inv-stat">
+                  <div class="inv-stat-num" style="color:#93c5fd" id="dev-roi">0%+</div>
+                  <div class="inv-stat-label" data-ar="عائد متوقع على المشروع" data-en="Expected Project Return">عائد متوقع على المشروع</div>
+                </div>
+                <div class="inv-stat">
+                  <div class="inv-stat-num" style="color:#93c5fd" id="dev-months">0</div>
+                  <div class="inv-stat-label" data-ar="شهر للتطوير والتشغيل" data-en="Months to Develop & Launch">شهر للتطوير والتشغيل</div>
+                </div>
+                <div class="inv-stat">
+                  <div class="inv-stat-num" style="color:#4ade80">✓</div>
+                  <div class="inv-stat-label" data-ar="إشراف كامل من أرقـم" data-en="Full ARQM Supervision">إشراف كامل من أرقـم</div>
+                </div>
+              </div>
+              <a class="btn btn-gold" href="https://wa.me/966555589155?text=مرحباً، لدي أرض وأريد الاستفسار عن تطويرها مع أرقـم" style="margin-top:8px">
+                استشر فريق التطوير ✦
+              </a>
+            </div>
+            <div class="investor-hero-visual">
+              <div class="inv-building">🌍</div>
+              <div class="inv-flow">
+                <div class="inv-flow-item">
+                  <div class="inv-flow-icon">📐</div>
+                  <span data-ar="دراسة الجدوى والموقع" data-en="Feasibility & Site Study">دراسة الجدوى والموقع</span>
+                </div>
+                <div class="inv-flow-arrow">↓</div>
+                <div class="inv-flow-item">
+                  <div class="inv-flow-icon">🏛️</div>
+                  <span>التصميم والترخيص</span>
+                </div>
+                <div class="inv-flow-arrow">↓</div>
+                <div class="inv-flow-item">
+                  <div class="inv-flow-icon">🏗️</div>
+                  <span>البناء والتنفيذ</span>
+                </div>
+                <div class="inv-flow-arrow">↓</div>
+                <div class="inv-flow-item active-flow" style="border-color:rgba(96,165,250,.4);background:rgba(96,165,250,.1)">
+                  <div class="inv-flow-icon">💰</div>
+                  <span style="color:#93c5fd">تشغيل وعائد سنوي</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="investor-grid" style="margin-top:16px">
+            <div class="inv-card">
+              <div class="inv-card-icon">📐</div>
+              <div class="inv-card-title">دراسة الجدوى الاقتصادية</div>
+              <div class="inv-card-desc">نحلل الموقع والسوق ونقدم لك دراسة جدوى كاملة توضح العائد المتوقع قبل البدء.</div>
+              <div class="inv-card-tags"><span>تحليل السوق</span><span>عائد متوقع</span><span>تقييم الموقع</span></div>
+            </div>
+            <div class="inv-card">
+              <div class="inv-card-icon">🏛️</div>
+              <div class="inv-card-title">التصميم والترخيص</div>
+              <div class="inv-card-desc">نتولى التصميم المعماري وفق اشتراطات سكن العمالة واستخراج جميع التراخيص اللازمة.</div>
+              <div class="inv-card-tags"><span>تصميم معماري</span><span>تراخيص</span><span>اشتراطات البلدية</span></div>
+            </div>
+            <div class="inv-card">
+              <div class="inv-card-icon">🏗️</div>
+              <div class="inv-card-title">الإشراف على البناء</div>
+              <div class="inv-card-desc">فريق هندسي متخصص يشرف على التنفيذ والجودة والالتزام بالجداول الزمنية والميزانية.</div>
+              <div class="inv-card-tags"><span>إشراف هندسي</span><span>ضبط جودة</span><span>التزام بالميزانية</span></div>
+            </div>
+            <div class="inv-card">
+              <div class="inv-card-icon">🚀</div>
+              <div class="inv-card-title">التشغيل الفوري بعد البناء</div>
+              <div class="inv-card-desc">فور الانتهاء من البناء، نتولى التشغيل الكامل مباشرة لضمان عدم توقف العائد.</div>
+              <div class="inv-card-tags"><span>تشغيل فوري</span><span>لا توقف</span><span>عائد مستمر</span></div>
+            </div>
+          </div>
+
+          <!-- خطوات تطوير الأراضي -->
+          <div class="steps-section">
+            <div class="steps-header">
+              <div class="section-tag" style="color:#93c5fd">كيف نطوّر أرضك؟</div>
+              <h3 style="font-size:clamp(20px,2.5vw,32px);font-weight:900;color:var(--cream);margin-top:6px">من أرض فضاء إلى مشروع يدرّ دخلاً</h3>
+            </div>
+            <div class="steps-grid">
+
+              <div class="step-card" style="--step-color:rgba(96,165,250,.3)">
+                <div class="step-num-wrap">
+                  <div class="step-num" style="color:#93c5fd;border-color:rgba(96,165,250,.3)">01</div>
+                  <div class="step-line" style="background:rgba(96,165,250,.2)"></div>
+                </div>
+                <div class="step-body">
+                  <div class="step-tag" style="color:#93c5fd">الخطوة الأولى</div>
+                  <h4 class="step-title">دراسة الجدوى والموقع</h4>
+                  <p class="step-desc">
+                    نزور أرضك، ندرس الموقع، ونحلل السوق — ثم نسلمك دراسة جدوى
+                    كاملة تشمل التكلفة والعائد المتوقع. كل هذا مجاناً، قبل ما تقرر أي شيء.
+                  </p>
+                  <div class="step-tags">
+                    <span>زيارة ميدانية</span>
+                    <span>دراسة جدوى</span>
+                    <span>مجاناً</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-card" style="--step-color:rgba(96,165,250,.3)">
+                <div class="step-num-wrap">
+                  <div class="step-num" style="color:#93c5fd;border-color:rgba(96,165,250,.3)">02</div>
+                  <div class="step-line" style="background:rgba(96,165,250,.2)"></div>
+                </div>
+                <div class="step-body">
+                  <div class="step-tag" style="color:#93c5fd">الخطوة الثانية</div>
+                  <h4 class="step-title" data-ar="التصميم والبناء والترخيص" data-en="Design, Construction & Licensing">التصميم والبناء والترخيص</h4>
+                  <p class="step-desc">
+                    نرسم التصميم، نستخرج التراخيص، ونشرف على كل مرحلة بناء.
+                    لا تعقيد، لا تأخير — نلتزم بالوقت والميزانية من أول يوم.
+                  </p>
+                  <div class="step-tags">
+                    <span>تصميم معماري</span>
+                    <span>استخراج تراخيص</span>
+                    <span>إشراف هندسي</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-card" style="--step-color:rgba(96,165,250,.3)">
+                <div class="step-num-wrap">
+                  <div class="step-num" style="color:#93c5fd;border-color:rgba(96,165,250,.3)">03</div>
+                  <div class="step-line last-line" style="background:rgba(96,165,250,.2)"></div>
+                </div>
+                <div class="step-body">
+                  <div class="step-tag" style="color:#93c5fd">الخطوة الثالثة</div>
+                  <h4 class="step-title" data-ar="تشغيل فوري، عائد بلا توقف 🚀" data-en="Instant Launch, Non-Stop Returns 🚀">تشغيل فوري، عائد بلا توقف 🚀</h4>
+                  <p class="step-desc">
+                    ما إن ينتهي البناء حتى نشغّل المشروع في نفس اليوم.
+                    صفر فترة انتظار، صفر إهدار — عائدك السنوي يبدأ فوراً.
+                  </p>
+                  <div class="step-tags">
+                    <span>تشغيل فوري</span>
+                    <span>عائد سنوي</span>
+                    <span>صفر توقف</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="investor-cta" style="margin-top:16px;border-color:rgba(96,165,250,.2);background:linear-gradient(135deg,rgba(96,165,250,.08),rgba(28,61,44,.3))">
+            <div class="investor-cta-text">
+              <div class="section-tag" style="margin-bottom:8px" data-ar="أرضك تستحق أكثر" data-en="Your Land Deserves More">أرضك تستحق أكثر</div>
+              <p data-ar="أرسلنا موقع الأرض — وندرسها ونرجعلك بدراسة جدوى مجانية خلال 48 ساعة ⚡" data-en="Send us your land location — we study it and return a free feasibility study within 48 hours ⚡">أرسلنا موقع الأرض — وندرسها ونرجعلك بدراسة جدوى مجانية خلال 48 ساعة ⚡</p>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end">
+              <a class="btn btn-gold" href="https://wa.me/966555589155?text=مرحباً، لدي أرض أريد تطويرها مع أرقـم" data-ar="تواصل معنا الآن" data-en="Contact Us Now">تواصل معنا الآن</a>
+              <a class="btn btn-outline" href="#quote" data-ar="طلب دراسة جدوى" data-en="Request Feasibility Study">طلب دراسة جدوى</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end tabs wrap -->
+
+    </div>
+  </section>
+
+  <!-- ═══ PORTFOLIO ═══ -->
+  <section class="section" id="portfolio">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:40px">
+        <div class="section-tag">المجمعات</div>
+        <h2>محفظة تشغيلية<br>متعددة المواقع في <span class="accent">الرياض</span></h2>
+      </div>
+      <div class="portfolio-layout reveal">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>المجمع</th><th>الطاقة</th><th>الحالة</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sulai Camp</td><td>1,050</td><td><span class="tag tag-green" data-ar="تشغيلي" data-en="Operational">تشغيلي</span></td></tr>
+              <tr><td>Nahda District Compound</td><td>4,200</td><td><span class="tag tag-gold" data-ar="مؤمّن / جاهز" data-en="Secured / Ready">مؤمّن / جاهز</span></td></tr>
+              <tr><td>Al Rimal Compound</td><td>4,000</td><td><span class="tag tag-gold">مؤمّن / جاهز</span></td></tr>
+              <tr><td>Aziziya Camp</td><td>750</td><td><span class="tag tag-blue" data-ar="مؤمّن" data-en="Secured">مؤمّن</span></td></tr>
+              <tr><td>Sulai Camp 2</td><td>1,100</td><td><span class="tag tag-blue">مؤمّن</span></td></tr>
+              <tr><td>New Location in Pipeline</td><td>15,000+</td><td><span class="tag tag-blue" data-ar="مرحلة التفعيل" data-en="Pipeline">مرحلة التفعيل</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="location-card">
+          <h3>المواقع الرئيسية</h3>
+          <p data-ar="الرمال، السلي، النهضة، العزيزية، وموقع جديد ضمن خط التوسع." data-en="Al-Rimal, Sulai, Nahda, Aziziya, and new pipeline location.">الرمال، السلي، النهضة، العزيزية، وموقع جديد ضمن خط التوسع.</p>
+          <div class="chips">
+            <div class="chip">Al Rimal</div>
+            <div class="chip">Sulai</div>
+            <div class="chip">Nahda</div>
+            <div class="chip">Aziziya</div>
+          </div>
+          <div class="map-box">🗺️</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MAP ═══ -->
+  <section class="section section-alt" id="map">
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:50px">
+        <div class="section-tag" style="justify-content:center">مواقعنا</div>
+        <h2>مجمعاتنا على <span class="accent">خريطة الرياض</span></h2>
+        <p class="section-desc" style="margin:0 auto">اكتشف مواقع مجمعات أرقـم التشغيلية والمؤمّنة في مختلف أحياء الرياض.</p>
+      </div>
+
+      <div class="map-section-wrap reveal">
+        <!-- Legend -->
+        <div class="map-legend">
+          <div class="legend-item"><span class="legend-dot dot-active"></span> تشغيلي</div>
+          <div class="legend-item"><span class="legend-dot dot-secured"></span> مؤمّن / جاهز</div>
+          <div class="legend-item"><span class="legend-dot dot-pipeline"></span> مرحلة التفعيل</div>
+        </div>
+
+        <!-- Map -->
+        <div id="arqm-map"></div>
+
+        <!-- Cards row -->
+        <div class="map-cards">
+          <div class="map-loc-card active-card" onclick="flyTo(24.6877, 46.7219, 'Sulai Camp')">
+            <div class="mlc-dot dot-active"></div>
+            <div>
+              <div class="mlc-name">Sulai Camp</div>
+              <div class="mlc-sub">السلي · 1,050 وحدة</div>
+            </div>
+            <span class="mlc-tag tag-green">تشغيلي</span>
+          </div>
+          <div class="map-loc-card" onclick="flyTo(24.7136, 46.6753, 'Nahda District Compound')">
+            <div class="mlc-dot dot-secured"></div>
+            <div>
+              <div class="mlc-name">Nahda District</div>
+              <div class="mlc-sub">النهضة · 4,200 وحدة</div>
+            </div>
+            <span class="mlc-tag tag-gold">جاهز</span>
+          </div>
+          <div class="map-loc-card" onclick="flyTo(24.6952, 46.7641, 'Al Rimal Compound')">
+            <div class="mlc-dot dot-secured"></div>
+            <div>
+              <div class="mlc-name">Al Rimal Compound</div>
+              <div class="mlc-sub">الرمال · 4,000 وحدة</div>
+            </div>
+            <span class="mlc-tag tag-gold">جاهز</span>
+          </div>
+          <div class="map-loc-card" onclick="flyTo(24.6500, 46.7800, 'Aziziya Camp')">
+            <div class="mlc-dot dot-secured"></div>
+            <div>
+              <div class="mlc-name">Aziziya Camp</div>
+              <div class="mlc-sub">العزيزية · 750 وحدة</div>
+            </div>
+            <span class="mlc-tag tag-blue">مؤمّن</span>
+          </div>
+          <div class="map-loc-card" onclick="flyTo(24.6920, 46.7150, 'Sulai Camp 2')">
+            <div class="mlc-dot dot-secured"></div>
+            <div>
+              <div class="mlc-name">Sulai Camp 2</div>
+              <div class="mlc-sub">السلي · 1,100 وحدة</div>
+            </div>
+            <span class="mlc-tag tag-blue">مؤمّن</span>
+          </div>
+          <div class="map-loc-card" onclick="flyTo(24.7400, 46.6200, 'New Location')">
+            <div class="mlc-dot dot-pipeline"></div>
+            <div>
+              <div class="mlc-name">New Location</div>
+              <div class="mlc-sub">قيد التفعيل · 15,000+</div>
+            </div>
+            <span class="mlc-tag tag-blue">pipeline</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GALLERY ═══ -->
+  <section class="section section-alt" id="gallery">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:40px">
+        <div class="section-tag">معرض الصور</div>
+        <h2>من <span class="accent">المجمعات</span> والخدمات</h2>
+      </div>
+      <div class="gallery-grid reveal">
+        <div class="gallery-item">
+          <div class="gallery-visual" style="background:linear-gradient(135deg,#0D1F16,#1C3D2C)">🏢</div>
+          <div class="gallery-label" data-ar="مبانٍ ومرافق" data-en="Buildings & Facilities">مبانٍ ومرافق</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-visual" style="background:linear-gradient(135deg,#1a3d2b,#254d38)">🛏️</div>
+          <div class="gallery-label" data-ar="غرف العمالة" data-en="Worker Rooms">غرف العمالة</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-visual" style="background:linear-gradient(135deg,#254d38,#3d6b50)">🏘️</div>
+          <div class="gallery-label" data-ar="مجمع النهضة" data-en="Nahda Compound">مجمع النهضة</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-visual" style="background:linear-gradient(135deg,#1C3D2C,#2d5a3f)">🏗️</div>
+          <div class="gallery-label" data-ar="مجمع الرمال" data-en="Al-Rimal Compound">مجمع الرمال</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-visual" style="background:linear-gradient(135deg,#0D1F16,#1C3D2C)">🍽️</div>
+          <div class="gallery-label" data-ar="الإعاشة" data-en="Catering">الإعاشة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTORS ═══ -->
+  <section class="section" id="sectors">
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:50px">
+        <div class="section-tag" style="justify-content:center">القطاعات المستهدفة</div>
+        <h2>مصمم للشركات التي تحتاج<br>إسكانًا <span class="accent">منظمًا وقابلاً للتوسع</span></h2>
+      </div>
+      <div class="sectors-grid">
+        <div class="sector-card reveal">
+          <span class="sector-icon">🏗️</span>
+          <div class="sector-name">المقاولات والبنية التحتية</div>
+          <div class="sector-desc" data-ar="لشركات المقاولات ومشاريع الإنشاءات الكبرى التي تحتاج سكناً منظماً لعمالتها." data-en="For contracting companies and large construction projects needing organized worker housing.">لشركات المقاولات ومشاريع الإنشاءات الكبرى التي تحتاج سكناً منظماً لعمالتها.</div>
+        </div>
+        <div class="sector-card reveal">
+          <span class="sector-icon">⚙️</span>
+          <div class="sector-name">الصناعة والنفط والغاز</div>
+          <div class="sector-desc" data-ar="للمشاريع الصناعية ومقاولي النفط والغاز الذين يحتاجون حلولاً لوجستية متكاملة." data-en="For industrial projects and oil & gas contractors needing comprehensive logistics.">للمشاريع الصناعية ومقاولي النفط والغاز الذين يحتاجون حلولاً لوجستية متكاملة.</div>
+        </div>
+        <div class="sector-card reveal">
+          <span class="sector-icon">🏙️</span>
+          <div class="sector-name">المشاريع الحكومية والكبرى</div>
+          <div class="sector-desc" data-ar="للمشاريع الضخمة والوجهات التطويرية ضمن رؤية المملكة 2030." data-en="For mega projects and development destinations under Saudi Vision 2030.">للمشاريع الضخمة والوجهات التطويرية ضمن رؤية المملكة 2030.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PARTNERS / CLIENTS ═══ -->
+  <section class="section" id="partners">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:48px" class="reveal">
+        <div class="section-tag" data-ar="شركاؤنا" data-en="Our Partners">شركاؤنا</div>
+        <h2 data-ar="شركات تثق بنا" data-en="Companies That Trust Us">شركات <span class="accent">تثق بنا</span></h2>
+        <p class="section-desc" data-ar="نفخر بخدمة كبرى الشركات والمشاريع في المملكة العربية السعودية" data-en="Proud to serve leading companies and projects across Saudi Arabia">نفخر بخدمة كبرى الشركات والمشاريع في المملكة العربية السعودية</p>
+      </div>
+
+      <!-- Partner logos grid -->
+      <div class="partners-grid reveal">
+
+        <div class="partner-card">
+          <div class="partner-icon">🎡</div>
+          <div class="partner-name" data-ar="القدية" data-en="Qiddiya">القدية</div>
+          <div class="partner-tag" data-ar="ترفيه وسياحة" data-en="Entertainment & Tourism">ترفيه وسياحة</div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-icon">✈️</div>
+          <div class="partner-name" data-ar="مطار الملك سلمان الدولي" data-en="King Salman Int'l Airport">مطار الملك سلمان الدولي</div>
+          <div class="partner-tag" data-ar="بنية تحتية" data-en="Infrastructure">بنية تحتية</div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-icon">🏛️</div>
+          <div class="partner-name" data-ar="الدرعية" data-en="Diriyah">الدرعية</div>
+          <div class="partner-tag" data-ar="تطوير تراثي وثقافي" data-en="Heritage & Cultural Development">تطوير تراثي وثقافي</div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-icon">📦</div>
+          <div class="partner-name" data-ar="أمازون السعودية" data-en="Amazon Saudi Arabia">أمازون السعودية</div>
+          <div class="partner-tag" data-ar="لوجستيات وتقنية" data-en="Logistics & Technology">لوجستيات وتقنية</div>
+        </div>
+
+      </div>
+
+      <!-- Trust bar -->
+      <div class="partners-trust reveal">
+        <div class="trust-item">
+          <div class="trust-num">4+</div>
+          <div class="trust-lbl" data-ar="شركاء استراتيجيون" data-en="Strategic Partners">شركاء استراتيجيون</div>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <div class="trust-num">100%</div>
+          <div class="trust-lbl" data-ar="رضا العملاء" data-en="Client Satisfaction">رضا العملاء</div>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <div class="trust-num">24/7</div>
+          <div class="trust-lbl" data-ar="دعم مستمر لعملائنا" data-en="Continuous Client Support">دعم مستمر لعملائنا</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ PARTNERS ═══ -->
+  <section class="section" id="partners">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag" data-ar="شركاؤنا" data-en="Our Partners">شركاؤنا</div>
+        <h2 data-ar="يثقون في أرقـم" data-en="They Trust ARQM">يثقون في <span class="accent">أرقـم</span></h2>
+        <p class="section-desc" data-ar="شركات رائدة تعتمد على أرقـم لإدارة سكن عمالتها في الرياض." data-en="Leading companies that rely on ARQM to manage their worker accommodation in Riyadh.">شركات رائدة تعتمد على أرقـم لإدارة سكن عمالتها في الرياض.</p>
+      </div>
+
+      <div class="partners-grid reveal">
+
+        <div class="partner-card">
+          <div class="partner-logo-mark" style="background:linear-gradient(135deg,#1a1a2e,#16213e);border-color:rgba(255,165,0,.3)">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#FFA500;letter-spacing:2px">QIDDIYA</span>
+          </div>
+          <div class="partner-name" data-ar="القدية" data-en="Qiddiya">القدية</div>
+          <div class="partner-tag" data-ar="مشروع ترفيهي — رؤية 2030" data-en="Entertainment — Vision 2030">مشروع ترفيهي — رؤية 2030</div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-mark" style="background:linear-gradient(135deg,#0a2240,#0d3060);border-color:rgba(0,160,220,.3)">
+            <span style="font-family:'Tajawal',sans-serif;font-size:13px;font-weight:800;color:#00A0DC;letter-spacing:1px;text-align:center;line-height:1.4">مطار<br>الملك سلمان</span>
+          </div>
+          <div class="partner-name" data-ar="مطار الملك سلمان" data-en="King Salman Airport">مطار الملك سلمان</div>
+          <div class="partner-tag" data-ar="بنية تحتية — صندوق الاستثمارات" data-en="Infrastructure — PIF">بنية تحتية — صندوق الاستثمارات</div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-mark" style="background:linear-gradient(135deg,#1a0a00,#2d1500);border-color:rgba(184,150,62,.4)">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#B8963E;letter-spacing:3px">DIRIYAH</span>
+          </div>
+          <div class="partner-name" data-ar="الدرعية" data-en="Diriyah">الدرعية</div>
+          <div class="partner-tag" data-ar="تطوير تراثي — اليونسكو" data-en="Heritage Development — UNESCO">تطوير تراثي — اليونسكو</div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-mark" style="background:linear-gradient(135deg,#0d1117,#1a2332);border-color:rgba(255,153,0,.3)">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#FF9900;letter-spacing:1px">amazon</span>
+          </div>
+          <div class="partner-name" data-ar="أمازون" data-en="Amazon">أمازون</div>
+          <div class="partner-tag" data-ar="لوجستيات وتجارة إلكترونية" data-en="Logistics & E-Commerce">لوجستيات وتجارة إلكترونية</div>
+        </div>
+
+      </div>
+
+      <div class="partners-note reveal" data-ar="✦ هذه الشركات تعتمد على أرقـم في تشغيل وإدارة سكن عمالتها" data-en="✦ These companies rely on ARQM to operate and manage their worker accommodation">✦ هذه الشركات تعتمد على أرقـم في تشغيل وإدارة سكن عمالتها</div>
+
+    </div>
+  </section>
+
+  <!-- ═══ QUOTE ═══ -->
+  <section class="section section-alt" id="quote">
+    <div class="container">
+      <div class="quote-wrap reveal">
+        <div>
+          <div class="section-tag">طلب عرض سعر</div>
+          <h2>أرسل احتياجك<br>وسنقترح <span class="accent">الحل المناسب</span></h2>
+          <p class="section-desc">
+            املأ البيانات وسيتم فتح رسالة واتساب جاهزة ترسلها مباشرة لفريق أرقـم.
+            سنتواصل معك خلال 24 ساعة.
+          </p>
+          <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px">
+            <div class="about-item"><div class="about-item-icon">⚡</div data-ar="رد خلال 24 ساعة" data-en="Response within 24 hours">رد خلال 24 ساعة</div>
+            <div class="about-item"><div class="about-item-icon">📊</div data-ar="عرض سعر مخصص لاحتياجك" data-en="Customized quote for your needs">عرض سعر مخصص لاحتياجك</div>
+            <div class="about-item"><div class="about-item-icon">🤝</div data-ar="استشارة مجانية بدون التزام" data-en="Free consultation, no obligation">استشارة مجانية بدون التزام</div>
+          </div>
+        </div>
+        <div class="quote-form">
+          <label>اسم الشركة</label>
+          <input id="company" required placeholder="مثال: شركة المقاولات الحديثة"/>
+          <label>اسم المسؤول</label>
+          <input id="person" required placeholder="الاسم الكامل"/>
+          <label>عدد العمال</label>
+          <select id="workers">
+            <option>أقل من 50</option>
+            <option>50 - 150</option>
+            <option>150 - 500</option>
+            <option>أكثر من 500</option>
+          </select>
+          <label>الموقع المفضّل في الرياض</label>
+          <div class="location-btns">
+            <button type="button" class="loc-btn" onclick="toggleLoc(this)">🧭 شمال الرياض</button>
+            <button type="button" class="loc-btn" onclick="toggleLoc(this)">🌅 جنوب الرياض</button>
+            <button type="button" class="loc-btn" onclick="toggleLoc(this)">🌄 شرق الرياض</button>
+            <button type="button" class="loc-btn" onclick="toggleLoc(this)">🌇 غرب الرياض</button>
+            <button type="button" class="loc-btn" onclick="toggleLoc(this)">🏙️ وسط الرياض</button>
+            <button type="button" class="loc-btn" onclick="toggleLoc(this)">📍 أي موقع</button>
+          </div>
+          <input type="hidden" id="location" value=""/>
+          <label>الخدمات المطلوبة</label>
+          <textarea id="message" placeholder="مثال: سكن + إعاشة + نقل"></textarea>
+          <button class="btn btn-gold" style="width:100%;font-size:16px" onclick="sendQuote()">
+            أرسل طلبك الآن ↗
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROFILE ═══ -->
+  <section class="section" id="profile">
+    <div class="container">
+      <div class="profile-wrap reveal">
+        <div>
+          <div class="section-tag">ملف الشركة</div>
+          <h2>حمّل البروفايل<br>الرسمي لـ <span class="accent">أرقـم</span></h2>
+          <p class="section-desc" style="margin-bottom:28px">
+            يتضمن تفاصيل الطاقة الاستيعابية، الخدمات، المجمعات، ونطاق العمل الكامل.
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-gold" href="ARQM-Profile.pdf" target="_blank">فتح PDF ↗</a>
+            <a class="btn btn-outline" href="ARQM-Profile.pdf" download>تحميل الملف</a>
+          </div>
+        </div>
+        <div class="pdf-box">📄</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <div class="contact-wrap reveal">
+        <div>
+          <div class="section-tag">تواصل معنا</div>
+          <h2>جاهزون لتشغيل<br>سكن <span class="accent">عمالتك</span></h2>
+          <p class="section-desc" style="margin-bottom:28px">
+            تواصل معنا لتحديد احتياجك والحصول على عرض مناسب لموقع مشروعك وعدد العمال.
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-gold" href="https://wa.me/966555589155" data-ar="واتساب مباشر" data-en="WhatsApp Direct">واتساب مباشر</a>
+            <a class="btn btn-outline" href="mailto:info@arqm.sa" data-ar="إرسال بريد" data-en="Send Email">إرسال بريد</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            الرياض، المملكة العربية السعودية
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">☎️</div>
+            +966 55 558 9155
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            info@arqm.sa
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🏢</div>
+            ARQM | أرقـم — by SSCORP
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+
+    <!-- Footer top -->
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="brand-symbol" style="width:48px;height:48px;border-radius:14px">
+            <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+              <path d="M14 2L26 9V19L14 26L2 19V9L14 2Z" stroke="#B8963E" stroke-width="1.5" fill="none"/>
+              <path d="M14 8L20 11.5V18.5L14 22L8 18.5V11.5L14 8Z" fill="rgba(184,150,62,.2)" stroke="#B8963E" stroke-width="1"/>
+              <circle cx="14" cy="14" r="2.5" fill="#B8963E"/>
+            </svg>
+          </div>
+          <div>
+            <div style="font-size:20px;font-weight:900;color:var(--gold);font-family:'Cormorant Garamond',serif;letter-spacing:2px">ARQM</div>
+            <div style="font-size:12px;color:rgba(232,220,200,.4);font-weight:700">أرقـم — by SSCORP</div>
+          </div>
+        </div>
+        <p class="footer-desc" data-ar="منصة متكاملة لإدارة وتشغيل سكن العمالة — نقطة مسؤولية واحدة لكل شيء." data-en="An integrated platform for managing and operating worker accommodation.">منصة متكاملة لإدارة وتشغيل سكن العمالة — نقطة مسؤولية واحدة لكل شيء.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/arqm_sa?igsh=MXIycWdzZmtwc3p3NA%3D%3D&utm_source=qr" target="_blank" class="social-link instagram" title="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <a href="https://x.com/arqm_sa?s=21&t=2yKHsS2iJ0n2gUjyQAwoaw" target="_blank" class="social-link twitter" title="X (Twitter)">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+            </svg>
+          </a>
+          <a href="https://snapchat.com/t/TB01q9hr" target="_blank" class="social-link snapchat" title="Snapchat">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.065.001c1.573-.005 3.033.398 4.195 1.33.785.622 1.357 1.448 1.727 2.375.243.608.31 1.266.33 1.914.013.425.024.851.028 1.276.003.21.035.387.245.508.181.106.38.145.578.168.394.047.785.046 1.168-.063.193-.055.384-.073.578-.025.28.07.432.254.427.524-.005.26-.17.44-.41.543-.083.034-.17.058-.256.082-.53.147-1.012.378-1.398.796-.218.236-.323.509-.217.822.087.259.178.517.264.777.25.768.165 1.478-.264 2.147-.434.675-1.072 1.086-1.81 1.359-.244.09-.494.162-.737.246-.124.043-.213.12-.231.256-.021.158.063.272.177.368.27.228.578.374.902.492.694.254 1.395.491 2.054.83.315.161.614.342.854.598.38.406.431.88.161 1.346-.214.368-.553.562-.948.676-.414.12-.836.13-1.253.046-.325-.066-.645-.159-.97-.207-.195-.029-.395-.023-.584.05-.299.116-.533.316-.756.53-.494.471-1.041.857-1.669 1.122-.784.33-1.6.451-2.449.376-.83-.073-1.596-.356-2.285-.817-.46-.306-.869-.677-1.279-1.046-.18-.162-.37-.3-.606-.355-.22-.052-.436-.027-.648.019-.331.072-.656.167-.99.228-.398.072-.8.088-1.191-.038-.619-.2-.989-.617-1.056-1.263-.044-.425.118-.783.427-1.075.363-.343.807-.555 1.264-.742.516-.211 1.034-.418 1.527-.674.351-.182.677-.395.907-.723.085-.121.13-.252.089-.397-.041-.144-.156-.214-.294-.259-.272-.089-.551-.156-.822-.245-.67-.218-1.267-.563-1.726-1.108-.51-.606-.695-1.308-.528-2.094.059-.276.152-.543.237-.812.091-.291.002-.543-.19-.764-.37-.427-.844-.656-1.363-.81C1.576 9.6 1.378 9.54 1.19 9.455c-.346-.155-.484-.44-.371-.785.09-.272.306-.414.582-.449.166-.021.333-.007.498.034.498.123 1.003.113 1.509.03.18-.03.277-.142.283-.329.014-.437.025-.875.047-1.312.046-.888.272-1.724.789-2.458C5.265 2.587 6.636 1.559 8.357.84 9.521.356 10.74.1 12.065.001z"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@arqm_sa?_r=1&_t=ZS-91Q79IW1vB2" target="_blank" class="social-link tiktok" title="TikTok">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.56V6.79a4.85 4.85 0 01-1.07-.1z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h5>الخدمات</h5>
+          <a href="#services">إدارة السكن</a>
+          <a href="#services">الصيانة والمرافق</a>
+          <a href="#services">الأمن والسلامة</a>
+          <a href="#services">الإعاشة والنقل</a>
+        </div>
+        <div class="footer-col">
+          <h5>للمستثمرين</h5>
+          <a href="#investor">تشغيل عقار</a>
+          <a href="#investor">تطوير أراضي</a>
+          <a href="#quote">طلب عرض سعر</a>
+        </div>
+        <div class="footer-col">
+          <h5>تواصل</h5>
+          <a href="https://wa.me/966555589155">واتساب</a>
+          <a href="mailto:info@arqm.sa">البريد الإلكتروني</a>
+          <a href="#map">مواقعنا</a>
+          <a href="#portfolio">المجمعات</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer bottom -->
+    <div class="footer-bottom">
+      <span class="footer-copy" data-ar="© 2026 ARQM | أرقـم — جميع الحقوق محفوظة" data-en="© 2026 ARQM — All Rights Reserved">© 2026 ARQM | أرقـم — جميع الحقوق محفوظة</span>
+      <span class="footer-tag" data-ar="Craft that Tells a Story." data-en="Craft that Tells a Story.">Craft that Tells a Story.</span>
+      <span class="footer-copy">الرياض، المملكة العربية السعودية 🇸🇦</span>
+    </div>
+
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a class="wa-btn" href="https://wa.me/966555589155">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  واتساب
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+// ── MAP INIT ──
+const locations = [
+  {
+    name:'Sulai Camp', ar:'السلي',
+    lat:24.6877, lng:46.7219,
+    cap:'1,050', status:'تشغيلي', type:'active'
+  },
+  {
+    name:'Nahda District Compound', ar:'النهضة',
+    lat:24.7136, lng:46.6753,
+    cap:'4,200', status:'مؤمّن / جاهز', type:'secured'
+  },
+  {
+    name:'Al Rimal Compound', ar:'الرمال',
+    lat:24.6952, lng:46.7641,
+    cap:'4,000', status:'مؤمّن / جاهز', type:'secured'
+  },
+  {
+    name:'Aziziya Camp', ar:'العزيزية',
+    lat:24.6500, lng:46.7800,
+    cap:'750', status:'مؤمّن', type:'secured'
+  },
+  {
+    name:'Sulai Camp 2', ar:'السلي 2',
+    lat:24.6920, lng:46.7150,
+    cap:'1,100', status:'مؤمّن', type:'secured'
+  },
+  {
+    name:'New Location', ar:'قيد التفعيل',
+    lat:24.7400, lng:46.6200,
+    cap:'15,000+', status:'مرحلة التفعيل', type:'pipeline'
+  }
+];
+
+const colors = {active:'#4ade80', secured:'#B8963E', pipeline:'#60a5fa'};
+const tagClass = {active:'tag-green', secured:'tag-gold', pipeline:'tag-blue'};
+const tagStyle = {
+  active:'background:rgba(21,128,77,.2);color:#4ade80;border:1px solid rgba(74,222,128,.2)',
+  secured:'background:rgba(184,150,62,.15);color:#D4AF6A;border:1px solid rgba(184,150,62,.3)',
+  pipeline:'background:rgba(96,165,250,.1);color:#60a5fa;border:1px solid rgba(96,165,250,.2)'
+};
+
+function makeIcon(type){
+  const c = colors[type];
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="46" viewBox="0 0 36 46">
+    <defs>
+      <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+        <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${c}" flood-opacity="0.5"/>
+      </filter>
+    </defs>
+    <path d="M18 0C8.06 0 0 8.06 0 18c0 13.5 18 28 18 28S36 31.5 36 18C36 8.06 27.94 0 18 0z"
+      fill="${c}" filter="url(#shadow)" opacity="0.95"/>
+    <circle cx="18" cy="18" r="7" fill="rgba(13,31,22,.8)"/>
+    <circle cx="18" cy="18" r="3" fill="${c}"/>
+  </svg>`;
+  return L.divIcon({
+    html: svg,
+    iconSize:[36,46], iconAnchor:[18,46], popupAnchor:[0,-48],
+    className:''
+  });
+}
+
+// Init map after DOM ready
+window.addEventListener('DOMContentLoaded', () => {
+  const map = L.map('arqm-map', {
+    center:[24.6950, 46.7300],
+    zoom:12,
+    zoomControl:false,
+    attributionControl:false
+  });
+
+  // Dark tile layer
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    maxZoom:19,
+    attribution:'© OpenStreetMap © CARTO'
+  }).addTo(map);
+
+  L.control.zoom({position:'bottomleft'}).addTo(map);
+  L.control.attribution({position:'bottomright',prefix:''}).addTo(map);
+
+  // Add markers
+  const markers = {};
+  locations.forEach(loc => {
+    const popup = L.popup({
+      closeButton:false,
+      className:'arqm-popup'
+    }).setContent(`
+      <div class="popup-name">${loc.name}</div>
+      <div class="popup-info">📍 ${loc.ar} · الرياض</div>
+      <div class="popup-info">🏠 الطاقة: ${loc.cap} وحدة</div>
+      <span class="popup-tag" style="${tagStyle[loc.type]}">${loc.status}</span>
+    `);
+
+    const m = L.marker([loc.lat, loc.lng], {icon:makeIcon(loc.type)})
+      .addTo(map)
+      .bindPopup(popup);
+
+    // Pulse animation circle
+    const circle = L.circle([loc.lat, loc.lng], {
+      radius:400,
+      color:colors[loc.type],
+      fillColor:colors[loc.type],
+      fillOpacity:.08,
+      weight:1,
+      opacity:.3
+    }).addTo(map);
+
+    markers[loc.name] = {marker:m, circle};
+  });
+
+  // Expose flyTo globally
+  window.flyTo = (lat, lng, name) => {
+    map.flyTo([lat, lng], 14, {duration:1.2});
+    if(markers[name]) setTimeout(()=>markers[name].marker.openPopup(), 800);
+    document.querySelectorAll('.map-loc-card').forEach(c=>c.classList.remove('active-card'));
+    event.currentTarget.classList.add('active-card');
+  };
+
+  // Open first popup
+  setTimeout(()=>markers['Sulai Camp'].marker.openPopup(), 800);
+});
+</script>
+
+<script>
+// ── Tab Switching ──
+function switchTab(tab){
+  document.querySelectorAll('.inv-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.inv-tab-content').forEach(c => c.classList.add('hidden'));
+  document.getElementById('tab-' + tab).classList.remove('hidden');
+  event.currentTarget.classList.add('active');
+
+  // Animate dev tab numbers on first open
+  if(tab === 'develop'){
+    const roiEl = document.getElementById('dev-roi');
+    const monEl = document.getElementById('dev-months');
+    if(roiEl && roiEl.textContent === '0%+'){
+      let v = 0;
+      const t = setInterval(()=>{ v++; roiEl.textContent = v + '%+'; if(v>=20) clearInterval(t); }, 60);
+    }
+    if(monEl && monEl.textContent === '0'){
+      let v = 0;
+      const t = setInterval(()=>{ v++; monEl.textContent = v; if(v>=12) clearInterval(t); }, 80);
+    }
+  }
+}
+
+// ── Animated Counters ──
+function animateCount(el, target, duration, suffix='', prefix='', decimals=0){
+  if(!el) return;
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if(start >= target){
+      start = target;
+      clearInterval(timer);
+    }
+    const val = decimals > 0 ? start.toFixed(decimals) : Math.floor(start);
+    el.textContent = prefix + Number(val).toLocaleString('ar-SA') + suffix;
+  }, 16);
+}
+
+// Easing counter with comma formatting
+function easeCounter(el, target, duration, suffix='', prefix=''){
+  if(!el) return;
+  const startTime = performance.now();
+  function update(now){
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(ease * target);
+    el.textContent = prefix + current.toLocaleString('en') + suffix;
+    if(progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// Watch hero card stats (trigger once visible)
+const heroCard = document.querySelector('.hero-card');
+let heroAnimated = false;
+const heroObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting && !heroAnimated){
+      heroAnimated = true;
+      // Stat boxes
+      easeCounter(document.getElementById('stat-units'),  11100, 2000, '');
+      easeCounter(document.getElementById('stat-workers'), 30,   1800, 'K+');
+      easeCounter(document.getElementById('stat-sites'),   5,    1200, '');
+      easeCounter(document.getElementById('stat-yield'),   15,   1500, '');
+      // Bars
+      document.querySelectorAll('.bar-fill').forEach(b => {
+        b.style.animation = 'none';
+        b.style.width = '0';
+        setTimeout(() => {
+          b.style.transition = 'width 1.8s cubic-bezier(.4,0,.2,1)';
+          b.style.width = b.classList.contains('b1') ? '85%'
+                        : b.classList.contains('b2') ? '62%' : '78%';
+        }, 200);
+      });
+    }
+  });
+}, {threshold: 0.3});
+if(heroCard) heroObs.observe(heroCard);
+
+// Watch metrics section
+const metricsEl = document.querySelector('.metrics-inner');
+let metAnimated = false;
+const metObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting && !metAnimated){
+      metAnimated = true;
+      easeCounter(document.getElementById('met-1'), 8000, 2000, '');
+      easeCounter(document.getElementById('met-2'), 3,    1000, '');
+    }
+  });
+}, {threshold: 0.4});
+if(metricsEl) metObs.observe(metricsEl);
+
+// Watch investor section stats
+const investorHero = document.querySelector('.investor-hero');
+let invAnimated = false;
+const invObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting && !invAnimated){
+      invAnimated = true;
+      // 95% occupancy
+      const occEl = document.getElementById('inv-occupancy');
+      if(occEl){
+        let v = 0;
+        const t = setInterval(()=>{
+          v += 1;
+          occEl.textContent = v + '%';
+          if(v >= 95) clearInterval(t);
+        }, 20);
+      }
+      // +15% annual yield
+      easeCounter(document.getElementById('inv-yield'), 15, 1500, '');
+      // 30+ days
+      const daysEl = document.getElementById('inv-days');
+      if(daysEl){
+        let v = 0;
+        const t = setInterval(()=>{
+          v += 1;
+          daysEl.textContent = v + '+';
+          if(v >= 30) clearInterval(t);
+        }, 45);
+      }
+    }
+  });
+}, {threshold: 0.3});
+if(investorHero) invObs.observe(investorHero);
+
+// ── Custom Cursor ──
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX - 5 + 'px';
+  cursor.style.top  = e.clientY - 5 + 'px';
+  ring.style.left   = e.clientX - 19 + 'px';
+  ring.style.top    = e.clientY - 19 + 'px';
+});
+document.querySelectorAll('a,button,.service-card,.sector-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2.5)';
+    ring.style.transform = 'scale(1.5)';
+    ring.style.borderColor = 'rgba(184,150,62,.8)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    ring.style.transform = 'scale(1)';
+    ring.style.borderColor = 'rgba(184,150,62,.5)';
+  });
+});
+
+// ── Scroll Reveal ──
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) e.target.classList.add('in');
+  });
+}, {threshold:.12});
+reveals.forEach(el => obs.observe(el));
+
+// ── Location Toggle (multi-select) ──
+function toggleLoc(btn){
+  btn.classList.toggle('selected');
+  const selected = [...document.querySelectorAll('.loc-btn.selected')]
+    .map(b => b.textContent.trim());
+  document.getElementById('location').value = selected.join(' | ');
+}
+
+// ── WhatsApp Quote ──
+function sendQuote() {
+  const company  = document.getElementById('company').value.trim();
+  const person   = document.getElementById('person').value.trim();
+  const workers  = document.getElementById('workers').value;
+  const location = document.getElementById('location').value;
+  const message  = document.getElementById('message').value.trim();
+  if(!company || !person){ alert('يرجى ملء جميع الحقول المطلوبة'); return; }
+  const text =
+    'مرحباً، أريد عرض سعر لخدمات سكن العمالة من أرقـم ARQM.%0A%0A' +
+    'اسم الشركة: '       + encodeURIComponent(company)  + '%0A' +
+    'اسم المسؤول: '      + encodeURIComponent(person)   + '%0A' +
+    'عدد العمال: '       + encodeURIComponent(workers)  + '%0A' +
+    (location ? 'الموقع المفضّل: ' + encodeURIComponent(location) + '%0A' : '') +
+    'الخدمات المطلوبة: ' + encodeURIComponent(message);
+  window.open('https://wa.me/966555589155?text=' + text, '_blank');
+}
+
+
+// ── LANGUAGE SYSTEM ──
+var EN_DICT = {
+  'عن الشركة': 'About',
+  'الخدمات': 'Services',
+  'للمستثمرين ✦': 'Investors ✦',
+  'المجمعات': 'Compounds',
+  'الصور': 'Gallery',
+  'القطاعات': 'Sectors',
+  'تواصل': 'Contact',
+  'تسجيل دخول': 'Sign In',
+  'طلب عرض سعر ✦': 'Get a Quote ✦',
+  'الرياض، المملكة العربية السعودية | +966 55 558 9155': 'Riyadh, Saudi Arabia | +966 55 558 9155',
+  ' حلول سكن العمالة للشركات الكبرى': ' Worker Accommodation Solutions',
+  'ابدأ شراكتك معنا ✦': 'Start Your Partnership ✦',
+  'استثمر معنا 🏢': 'Invest With Us 🏢',
+  'احصل على عرض سعر': 'Get a Quote',
+  'نقطة مسؤولية واحدة': 'Single Responsibility',
+  'تشغيل متكامل': 'Integrated Operations',
+  'امتثال وسلامة': 'Compliance & Safety',
+  'طاقة جاهزة في الرمال والنهضة': 'Ready Capacity in Al-Rimal & Nahda',
+  'أمن ومتابعة تشغيلية': 'Security & Operational Monitoring',
+  'وجبات يومية عبر شركاء معتمدين': 'Daily Meals via Certified Partners',
+  'مواءمة مع معايير سلامة الغذاء': 'Aligned with Food Safety Standards',
+  'طاقة مُدارة': 'Managed Capacity',
+  'مواقع في الرياض': 'Locations in Riyadh',
+  'عامل ضمن الخدمة/التوسع': 'Workers in Service',
+  'عن أرقـم': 'About ARQM',
+  'مشغّل متخصص لسكن العمالة وإدارة المرافق.': 'A Specialized Operator for Worker Accommodation & Facilities Management.',
+  'تحت مظلة المجموعة': 'Under the Group',
+  'نقطة مسؤولية واحدة لجميع الخدمات': 'Single Point of Responsibility',
+  'استجابة سريعة وتشغيل متواصل 24/7': 'Fast Response & 24/7 Operations',
+  'امتثال كامل لاشتراطات الجهات الحكومية': 'Full Compliance with Regulations',
+  'حلول قابلة للتوسع حسب احتياج المشروع': 'Scalable Solutions for Every Project',
+  'خدماتنا': 'Our Services',
+  'كل ما تحتاجه الشركة لإسكان العمالة تحت إدارة واحدة.': 'Everything Your Company Needs Under One Management.',
+  'خدمات تشغيلية متكاملة قابلة للتخصيص حسب عدد العمال، موقع المشروع، والمدة التشغيلية.': 'Fully customizable operational services based on worker count, project location, and duration.',
+  'إدارة السكن': 'Housing Management',
+  'تشغيل المجمعات، إدارة الإشغال، دخول وخروج العمال، وتطبيق لوائح السكن.': 'Compound operations, occupancy management, and housing regulations enforcement.',
+  'الصيانة وإدارة المرافق': 'Maintenance & Facilities',
+  'صيانة وقائية وتصحيحية للكهرباء والسباكة والتكييف والأعمال المدنية.': 'Preventive and corrective maintenance for electrical, plumbing, HVAC, and civil works.',
+  'الأمن والسلامة': 'Security & Safety',
+  'أمن 24/7، تحكم بالدخول، CCTV، أنظمة حريق، وتمارين سلامة دورية.': '24/7 security, access control, CCTV, fire systems, and safety drills.',
+  'الإعاشة والتموين': 'Catering & Provisioning',
+  'ثلاث وجبات يومية، وجبات معلبة، مطابخ مركزية، وصالات طعام.': 'Three daily meals, packed meals, central kitchens, and dining halls.',
+  'النقل واللوجستيات': 'Transportation & Logistics',
+  'نقل العمالة من وإلى مواقع العمل، تخطيط مسارات، وجدولة حسب الورديات.': 'Worker transportation to/from work sites, route planning, and shift scheduling.',
+  'الخدمات الداعمة': 'Support Services',
+  'عيادة، سوق مصغر، حلاق، مرافق رياضية، مغاسل، مواقف، ومناطق مشتركة.': 'Clinic, mini-market, barber, sports, laundry, parking, and common areas.',
+  'اكتشف المزيد →': 'Discover More →',
+  'للمستثمرين': 'For Investors',
+  'شراكة استثمارية': 'Investment Partnership',
+  'تناسب طموحك': 'That Suits Your Ambitions',
+  'سواء كنت تمتلك أرضاً تريد تطويرها، أو عقاراً جاهزاً تريد تشغيله — أرقـم لديها الحل الأمثل لك.': 'Whether you own land to develop or a ready property to operate — ARQM has the perfect solution.',
+  'تشغيل عقار': 'Property Operation',
+  'عمارة أو كمباوند جاهز': 'Ready building or compound',
+  'تطوير أراضي': 'Land Development',
+  'أرض فضاء أو مشروع جديد': 'Vacant land or new project',
+  'عقارك يشتغل،': 'Your property earns,',
+  'وأنت تقبض': 'while you collect',
+  'عمارة فاضية؟ كمباوند مهمل؟ مبنى بدون استثمار؟': 'Vacant building? Neglected compound? Unproductive property?',
+  'متوسط نسبة إشغال': 'Average Occupancy Rate',
+  'عائد سنوي على الاستثمار': 'Annual Return on Investment',
+  'يوم للتحضير والتشغيل': 'Days to Prepare & Launch',
+  'تحدث مع فريق الاستثمار ✦': 'Talk to Investment Team ✦',
+  'تأهيل وتجهيز العقار': 'Property Preparation & Setup',
+  'عقد تشغيل شفاف': 'Transparent Operations Contract',
+  'تقارير دورية مفصّلة': 'Detailed Periodic Reports',
+  'حماية العقار وصيانته': 'Property Protection & Maintenance',
+  'كيف نعمل معك؟': 'How We Work With You',
+  'ثلاث خطوات وعقارك يدرّ دخلاً': 'Three Steps to a Profitable Property',
+  'الخطوة الأولى': 'Step One',
+  'الخطوة الثانية': 'Step Two',
+  'الخطوة الثالثة': 'Step Three',
+  'فحص وتقييم العقار': 'Property Inspection & Assessment',
+  'تطوير وتحسين المكان': 'Development & Improvement',
+  'التشغيل ملعبنا 🎯': 'Operations Are Our Game 🎯',
+  'خطوتك التالية': 'Your Next Step',
+  'تواصل معنا الآن — التقييم مجاني ويجيك خلال 48 ساعة 🎯': 'Contact us now — free assessment within 48 hours 🎯',
+  'احصل على تقييم مجاني': 'Get a Free Assessment',
+  'أرضك تستحق': 'Your land deserves',
+  'أكثر من أن تبقى فاضية': 'more than sitting idle',
+  'عندك أرض وما تدري وين تبدأ؟': 'Have land and don\'t know where to start?',
+  'شهر للتطوير والتشغيل': 'Months to Develop & Launch',
+  'إشراف كامل من أرقـم': 'Full ARQM Supervision',
+  'استشر فريق التطوير ✦': 'Consult Development Team ✦',
+  'أرضك تستحق أكثر': 'Your Land Deserves More',
+  'تواصل معنا الآن': 'Contact Us Now',
+  'طلب دراسة جدوى': 'Request Feasibility Study',
+  'دراسة الجدوى والموقع': 'Feasibility & Site Study',
+  'التصميم والبناء والترخيص': 'Design, Construction & Licensing',
+  'تشغيل فوري، عائد بلا توقف 🚀': 'Instant Launch, Non-Stop Returns 🚀',
+  'القطاعات المستهدفة': 'Target Sectors',
+  'مصمم للشركات التي تحتاج إسكانًا منظمًا وقابلاً للتوسع.': 'Designed for Companies That Need Organized and Scalable Housing.',
+  'المقاولات والبنية التحتية': 'Contracting & Infrastructure',
+  'لشركات المقاولات ومشاريع الإنشاءات الكبرى التي تحتاج سكناً منظماً لعمالتها.': 'For contracting companies and large construction projects needing organized worker housing.',
+  'الصناعة والنفط والغاز': 'Industry, Oil & Gas',
+  'للمشاريع الصناعية ومقاولي النفط والغاز الذين يحتاجون حلولاً لوجستية متكاملة.': 'For industrial projects and oil & gas contractors needing comprehensive logistics.',
+  'المشاريع الحكومية والكبرى': 'Government & Mega Projects',
+  'للمشاريع الضخمة والوجهات التطويرية ضمن رؤية المملكة 2030.': 'For mega projects under Saudi Vision 2030.',
+  'مواقعنا': 'Our Locations',
+  'مجمعاتنا على خريطة الرياض': 'Our Compounds on the Riyadh Map',
+  'اكتشف مواقع مجمعات أرقـم التشغيلية والمؤمّنة في مختلف أحياء الرياض.': 'Discover ARQM\'s operational and secured compounds across Riyadh.',
+  'المواقع الرئيسية': 'Main Locations',
+  'مواقع رئيسية': 'Main Locations',
+  'الرمال، السلي، النهضة، العزيزية، وموقع جديد ضمن خط التوسع.': 'Al-Rimal, Sulai, Nahda, Aziziya, and a new pipeline location.',
+  'تشغيلي': 'Operational',
+  'مؤمّن / جاهز': 'Secured / Ready',
+  'مؤمّن': 'Secured',
+  'مرحلة التفعيل': 'Pipeline',
+  'محفظة تشغيلية متعددة المواقع في الرياض.': 'Multi-Location Operational Portfolio in Riyadh.',
+  'المجمع': 'Compound',
+  'الطاقة': 'Capacity',
+  'الحالة': 'Status',
+  'معرض الصور': 'Photo Gallery',
+  'مبانٍ ومرافق': 'Buildings & Facilities',
+  'غرف العمالة': 'Worker Rooms',
+  'مجمع النهضة': 'Nahda Compound',
+  'مجمع الرمال': 'Al-Rimal Compound',
+  'الإعاشة': 'Catering',
+  'النقل': 'Transportation',
+  'طلب عرض سعر': 'Request a Quote',
+  'أرسل احتياجك وسنقترح الحل المناسب.': 'Send Your Requirements & We\'ll Suggest the Right Solution.',
+  'اسم الشركة': 'Company Name',
+  'اسم المسؤول': 'Contact Person',
+  'عدد العمال': 'Number of Workers',
+  'أقل من 50': 'Less than 50',
+  '50 - 150': '50 - 150',
+  '150 - 500': '150 - 500',
+  'أكثر من 500': 'More than 500',
+  'الموقع المفضّل في الرياض': 'Preferred Location in Riyadh',
+  'الخدمات المطلوبة': 'Required Services',
+  'أرسل طلبك الآن ↗': 'Send Your Request ↗',
+  'رد خلال 24 ساعة': 'Response within 24 hours',
+  'عرض سعر مخصص لاحتياجك': 'Customized quote for your needs',
+  'استشارة مجانية بدون التزام': 'Free consultation, no obligation',
+  '🧭 شمال الرياض': '🧭 North Riyadh',
+  '🌅 جنوب الرياض': '🌅 South Riyadh',
+  '🌄 شرق الرياض': '🌄 East Riyadh',
+  '🌇 غرب الرياض': '🌇 West Riyadh',
+  '🏙️ وسط الرياض': '🏙️ Central Riyadh',
+  '📍 أي موقع': '📍 Any Location',
+  'مثال: شركة المقاولات الحديثة': 'e.g. Modern Contracting Co.',
+  'الاسم الكامل': 'Full Name',
+  'مثال: سكن + إعاشة + نقل': 'e.g. Housing + Catering + Transport',
+  'ملف الشركة': 'Company Profile',
+  'حمّل البروفايل الرسمي لـ أرقـم.': 'Download the Official ARQM Profile.',
+  'يتضمن تفاصيل الطاقة الاستيعابية، الخدمات، المجمعات، ونطاق العمل الكامل.': 'Includes capacity, services, compounds, and full scope of work.',
+  'فتح PDF': 'Open PDF',
+  'تحميل الملف': 'Download',
+  'تواصل معنا': 'Contact Us',
+  'جاهزون لتشغيل سكن عمالتك.': 'Ready to Operate Your Worker Housing.',
+  'تواصل معنا لتحديد احتياجك والحصول على عرض مناسب لموقع مشروعك وعدد العمال.': 'Contact us to get a suitable offer for your project.',
+  'واتساب مباشر': 'WhatsApp',
+  'إرسال بريد': 'Send Email',
+  'الرياض، المملكة العربية السعودية': 'Riyadh, Saudi Arabia',
+  '📍 الرياض، المملكة العربية السعودية': '📍 Riyadh, Saudi Arabia',
+  'منصة متكاملة لإدارة وتشغيل سكن العمالة — نقطة مسؤولية واحدة لكل شيء.': 'An integrated platform for managing worker accommodation — one point of responsibility.',
+  'الشركة': 'Company',
+  'من نحن': 'About Us',
+  'مدونتنا': 'Blog',
+  'الوظائف': 'Careers',
+  'الشركاء': 'Partners',
+  'اتصل بنا': 'Contact Us',
+  'الدعم': 'Support',
+  'مركز المساعدة': 'Help Center',
+  'الأسئلة الشائعة': 'FAQ',
+  'سياسة الخصوصية': 'Privacy Policy',
+  'الشروط والأحكام': 'Terms & Conditions',
+  'خريطة الموقع': 'Sitemap',
+  '© 2026 ARQM | أرقـم — جميع الحقوق محفوظة': '© 2026 ARQM — All Rights Reserved',
+  '🇸🇦 صُنع في المملكة العربية السعودية': '🇸🇦 Made in Saudi Arabia',
+  '💬 واتساب': '💬 WhatsApp',
+  'واتساب': 'WhatsApp',
+  'الإعاشة والنقل': 'Catering & Transport',
+  'خدمات الصيانة': 'Maintenance Services',
+  'إدارة النقل': 'Transportation',
+  'خدمات الإعاشة': 'Catering Services',
+  'التقارير والتحليلات': 'Reports & Analytics',
+  'أرقـم — by SSCORP': 'ARQM — by SSCORP',
+};
+
+var IS_EN = false;
+
+function toggleLang() {
+  IS_EN = !IS_EN;
+  var btn = document.getElementById('lang-toggle');
+  var flag = document.getElementById('lang-flag');
+  var label = document.getElementById('lang-label');
+  
+  if (IS_EN) {
+    flag.textContent = '🇬🇧';
+    label.textContent = 'AR';
+    document.documentElement.setAttribute('dir', 'ltr');
+    document.documentElement.setAttribute('lang', 'en');
+    document.title = 'ARQM | Integrated Worker Accommodation Solutions';
+    // Translate all [data-ar] elements
+    document.querySelectorAll('[data-ar]').forEach(function(el) {
+      var ar = el.getAttribute('data-ar');
+      var en = el.getAttribute('data-en') || EN_DICT[ar];
+      if (en) el.textContent = en;
+    });
+    // Translate text nodes
+    translateNodes(true);
+  } else {
+    flag.textContent = '🇸🇦';
+    label.textContent = 'EN';
+    document.documentElement.setAttribute('dir', 'rtl');
+    document.documentElement.setAttribute('lang', 'ar');
+    document.title = 'ARQM | أرقـم — حلول سكن العمالة للشركات';
+    // Restore [data-ar] elements
+    document.querySelectorAll('[data-ar]').forEach(function(el) {
+      el.textContent = el.getAttribute('data-ar');
+    });
+    // Restore text nodes
+    translateNodes(false);
+  }
+}
+
+var originalNodes = [];
+var nodesTagged = false;
+
+function tagNodes() {
+  if (nodesTagged) return;
+  nodesTagged = true;
+  var skip = ['SCRIPT','STYLE','INPUT','TEXTAREA','SELECT'];
+  var walker = document.createTreeWalker(
+    document.body, NodeFilter.SHOW_TEXT,
+    { acceptNode: function(n) {
+        var tag = n.parentNode && n.parentNode.tagName;
+        if (skip.indexOf(tag) >= 0) return NodeFilter.FILTER_REJECT;
+        var txt = n.textContent.trim();
+        if (txt.length < 2) return NodeFilter.FILTER_REJECT;
+        if (!/[\u0600-\u06FF]/.test(txt)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+    }}
+  );
+  var node;
+  while ((node = walker.nextNode())) {
+    var orig = node.textContent;
+    node._orig = orig;
+    node._en = EN_DICT[orig.trim()];
+    if (node._en) originalNodes.push(node);
+  }
+}
+
+function translateNodes(toEN) {
+  tagNodes();
+  originalNodes.forEach(function(n) {
+    if (toEN && n._en) {
+      n.textContent = n.textContent.replace(n._orig.trim(), n._en);
+    } else if (!toEN && n._orig) {
+      n.textContent = n._orig;
+    }
+  });
+}
+
+window.addEventListener('load', tagNodes);
+
+// ── Smooth nav close on link click ──
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.body.classList.remove('menu-open'));
+});
+</script>
+
+
+</body>
+</html>
